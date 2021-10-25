@@ -1,0 +1,9 @@
+module.exports = {
+  name: `edit`,
+  cooldown: 5,
+  desc: `edits the embed`,
+  async execute(message, args, client) {
+    if (!args[0]) {message.delete(); return message.channel.send(`Invalid, Must input Message ID`);}
+    let mes = message.guild.channels.cache.each(chann => {})
+  }
+}

@@ -1,0 +1,177 @@
+const { MessageEmbed, Message, TextChannel, Client, MessageButton, MessageActionRow } = require(`discord.js`);
+
+let row = new MessageActionRow()
+  .addComponents([new MessageButton().setCustomId(`OK`).setEmoji(`👍`).setStyle(`SUCCESS`)])
+
+/**
+ * 
+ * @param {Message} message 
+ * @param {String} chanstr 
+ * @returns {TextChannel}
+ */
+function channelCheck(message, chanstr) {
+  let channels = message.guild.channels;
+  let channel = channels.cache.filter(c => c.type == `GUILD_TEXT`).get(chanstr);
+  if (channel != undefined) return channel;
+  channel = channels.cache.filter(c => c.type == `GUILD_TEXT`).find(c => c.name.toLowerCase() == chanstr.toLowerCase());
+  if (channel != undefined) return channel;
+  channel = message.mentions.channels.filter(c => c.type == `GUILD_TEXT`);
+  if (channel.size != 0) return channel.first();
+  return undefined;
+}
+
+function makestring() {
+  let now = new Date();
+  return now.toLocaleString();
+}
+
+
+module.exports = {
+  name: `sendemb`,
+  cooldown: 5,
+  sRoles: [`A`],
+  desc: `Sends a custom embed`,
+  /**
+   * Sends an custom Embed
+   * @param {Message} message 
+   * @param {Array<String>} args 
+   * @param {Client} client 
+   * @returns {void} void
+   */
+  async execute(message, args, client) {
+    let helpem = new MessageEmbed()
+      .setColor(client.allInfo.color)
+      .setFooter(client.allInfo.footer)
+      .setTimestamp()
+      .setTitle(`Embed Help`)
+      .addField(`__Syntax__`, `**!sendemb CHANNEL "TITLE:TEXT" "SECOND TITLE:SECOND TEXT" "OPTION:TEXT OR LINK"**`)
+      .addField(`__Changing More__`, `If you want to change more things about the embeds\nlike the Title or/and color\nYou can add \`"_title:NEW TITLE"\` or/and \`"_color:NEW COLOR"\``)
+      .addField(`__Options__`, `TITLE: _title\nCOLOR: _color\nFOOTER: _footer\nDESCRIPTION: _desc\nTHUMBNAIL: _thumbnail\nAUTHOR: _author\nURL: _url\nIMAGE: _image\nFIELDS: anything`)
+      .addField(`__Examples__`, `!sendemb general "Notes: Theses are the notes" "_color: #00000"\n!sendemb 814344715822039053 "_title: Help Embed" "Helping: This is the embed for helping people"`);
+
+    if (!args[0]) return message.channel.send({ embeds: [helpem] });
+    if (args[0] == `_help`) {
+      return message.channel.send({ embeds: [helpem] });
+    }
+    let channel = channelCheck(message, args[0]);
+    if (channel == undefined) return message.channel.send(`Invalid, Could not find text channel\nDo **!sendemb _help** to find out how to use this command`);
+    if (!args[1]) return message.channel.send(`Can not send empty embed\nDo **!sendemb _help** to find out how to use this command`);
+    if (args[1].startsWith(`{`)) {
+      args.shift();
+      let newEmb = new MessageEmbed(JSON.parse(args.join(` `)));
+      let embJSON = JSON.stringify(newEmb.toJSON(), null);
+
+      try {
+        let mes = await message.channel.send({ content: `||<@${message.author.id}>||,\nTo Send Announcement React with 👍, you only have 60 seconds\n\n**JUST A PREVIEW, NOT THE ANNOUNCEMENT**`, embeds: [newEmb], components: [row] });
+        let collected = await mes.awaitMessageComponent({ time: 60 * 1000, filter: (inter) => inter.customId === `OK` && inter.user.id === message.author.id});
+        if (collected == undefined) {
+          mes.edit({ content: `Time has ran out, Announcement was not sent.`, embeds: [], components: [] })
+        } else {
+          mes.edit({ content: `**Announcement has been sent to <#${channel.id}>\nSent by ${message.author.username} (${message.author.id})**\n\n**EMBED JSON:**\n\`\`\`JSON\n${embJSON}\`\`\``, embeds: [], components: [] });
+          return channel.send({ embeds: [newEmb] })
+        }
+      } catch (err) {
+        console.log(err);
+        return message.channel.send({ content: `Time has ran out, Announcement was not sent.\nOr an Error has occured`})
+      }
+    } else {
+      args.shift();
+      let replacen = args.join(` `).replace(/\r?\n|\r/g, " 🈲 ")
+      let newargs = replacen.match(/(".*?"|[^"\s]+)+(?=\s*|\s*$)/g);
+      let arr_of_fie = [];
+      for (i = 0; i < newargs.length; i++) {
+        if (newargs[i].startsWith(`"`) && newargs[i].endsWith(`"`)) {
+          newargs[i] = newargs[i].substring(1, newargs[i].length - 1);
+          let field = newargs[i].split(`:`);
+          if (field == newargs[0]) return message.channel.send(`Invalid Format\nDo **!sendemb _help** to find out how to use this command`)
+          arr_of_fie.push(field);
+        }
+      }
+  
+      let now = makestring();
+  
+      const emb = new MessageEmbed()
+        .setColor(`#0fffbf`)
+        .setTimestamp()
+        .setFooter(`${now} PST`)
+        .setTitle(`Project Cashout`)
+        .setDescription(`**CURRENT PRICES AS OF ${now} PST**\n<@>\n`)
+        .setThumbnail(`https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`);
+  
+      for (let i=0;i<arr_of_fie.length;i++) {
+        let field = arr_of_fie[i];
+        try {
+          switch (field[0].toLowerCase()) {
+            case "_color":
+              emb.setColor(field[1].trim())
+              break;
+            case "_footer":
+              emb.setFooter(field[1].trim())
+              break;
+            case "_title":
+              emb.setTitle(field[1].trim())
+              break;
+            case "_desc":
+            case "_description":
+              emb.setDescription(field[1].trim())
+              break;
+            case "_thumbnail":
+              emb.setThumbnail(field[1].trim())
+              break;
+            case "_author":
+              emb.setAuthor(field[1].trim())
+              break;
+            case "_img":
+            case "_image":
+              emb.setImage(field[1].trim())
+              break;
+            case "_url":
+              emb.setURL(field[1].trim())
+              break;
+            default:
+              emb.addField(field[0].replace(/ 🈲 /g, `\n`).trim(), field[1].replace(/ 🈲 /g, `\n`).trim(), field[2]?.trim() || false)
+              break;
+          }
+        } catch (err) {
+          console.log(err)
+          return message.channel.send(`Error, Embed wasn't created properly`);
+        }
+      }
+  
+      try {
+        let mes = await message.channel.send({ content: `||<@${message.author.id}>||,\nTo Send Announcement React with 👍, you only have 60 seconds\n\n**JUST A PREVIEW, NOT THE ANNOUNCEMENT**`, embeds: [emb], components: [row] });
+        let collected = await mes.awaitMessageComponent({ time: 60 * 1000, filter: (inter) => inter.customId === `OK` && inter.user.id === message.author.id});
+        if (collected == undefined) {
+          mes.edit({ content: `Time has ran out, Announcement was not sent.`, embeds: [], components: [] })
+        } else {
+          mes.edit({ content: `**Announcement has been sent to <#${channel.id}>\nSent by ${message.author.username} (${message.author.id})**\n\n**EMBED JSON:**\n\`\`\`JSON\n${JSON.stringify(emb.toJSON(), null)}\`\`\``, embeds: [], components: [] });
+          channel.send({ embeds: [emb] })
+        }
+      } catch (err) {
+        console.log(err)
+        if (mes) await mes.delete();
+        message.channel.send({ content: `Time has ran out, Announcement was not sent.\nOr an Error has occured`})
+      }
+    }
+
+/*    const Emb = new MessageEmbed()
+      .setColor(`#0fffbf`)
+      .setFooter(`Current Cashout Prices | Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`)
+      .setTimestamp()
+      .setTitle(`Project Cashout`)
+      .setDescription(`**CURRENT PRICES AS OF 1:30 PM PST 9/22/2021**\n<@>\n`)
+      .setThumbnail(`https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`)
+      .addField(`__Consoles__`, `PlayStation 5 Disk \`-\` **$735**
+PlayStation 5 Digital \`-\` **$675**
+Xbox Series X \`-\` **$710**
+Xbox Series S \`-\` **$310**
+PlayStation 4 Slim \`-\` **$350**
+      `)
+      .addField(`__Games/ Accessories/ Other Electronics__`, `DM for pricing`)
+      .addField(`__Shipping Form__`, `[CLICK HERE FOR INSTRUCTIONS AND SHIPPING FORM](https://www.google.com/)\n🔸 Every shipment box must have a form inside, similar to the shipping process on StockX.`)
+      .addField(`__Notes__`, `Any shipment/dropoff that occured after this price update MUST FOLLOW these rates`);
+
+    await message.channel.send({ embeds: [Emb] });
+    await message.delete();*/
+  }
+}
