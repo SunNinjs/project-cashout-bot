@@ -109,7 +109,7 @@ module.exports = {
 > Xbox X - **$${prices.xbox}**
 > Switch OLED - **$${prices.oled}** (3 Minimum or with a console)
 > \u200B
-> **__Next Day Air Labels:__**
+> **__Overnight Labels:__**
 > PS5 Disc - **$${prices.ov_disc}**
 > PS5 Digital - **$${prices.ov_digi}**
 > Xbox X - **$${prices.ov_xbox}**
@@ -117,7 +117,7 @@ module.exports = {
 \u200B
           `)
           .addField(`**Other Electronics:**`, `
-> Xbox S - **$310**
+> Xbox S - **$300**
 > Ps4 Slim - **$${prices.ps4}**
 > Mario Kart 8 Switch - **$320**
 > Neon/ Grey Switch - **$250**
@@ -127,6 +127,18 @@ module.exports = {
 > Ps5/Xbox Games - **$15**
 > Ps5 Headsets - **$50**
 > Media Remote - **$15**
+> Airpods Pro - **$140**
+> Airpods Wireless Charging - **$75**
+> Airpods Wired Charging - **$90**
+> Apple Watch Ser 6 (40mm/44mm) - **$280/$310** (no red or blue)
+> Apple Watch Ser 6 SE (40mm/44mm) - **$210/$240**
+> Apple Watch Ser 5 (40mm/44mm) - **$210/$240**
+> Apple Watch Ser 3 (40mm/44mm) - **$90/$120**
+> iPad 8 (32gb/128gb) - **$120/$300**
+> iPad Air 4 (64gb/256gb) - **$410/$510**
+> iPad Mini 5 (64gb/256gb) - **$230/$330**
+> iPad Pro 11’ V2 (128gb/256gb/512gb/1tb)  - **$400/$500/$600/$700**
+> iPad Pro 12.9’ 4th Gen (128gb/256gb/512gb/1tb) - **$450/$550/$650/$750**
     
 **Open a ticket in <#872365247451762698> for a label. Prices are guaranteed once shipped!**
           `, false)
