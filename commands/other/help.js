@@ -1,5 +1,6 @@
 const { MessageEmbed, Collection, MessageButton, MessageActionRow } = require(`discord.js`);
 const fs = require(`fs`)
+const path = require(`path`);
 
 let rightbutton = new MessageButton()
   .setStyle(`SUCCESS`)
@@ -22,7 +23,7 @@ module.exports = {
   desc: `Shows all commands and their categories`,
   sRoles: [`A`],
   async execute(message, args, client) {
-    const categories = fs.readdirSync(`./commands`)
+    const categories = fs.readdirSync(path.resolve(__dirname, `../`))
     const { commands } = message.client
     let prefix = client.settings.prefix
     const info = client.allInfo
@@ -59,7 +60,7 @@ module.exports = {
         .setTimestamp()
         .setTitle(`${categories[categories.indexOf(args[0])].toUpperCase()} Category Subcommands`)
 
-      let category = await fs.readdirSync(`./commands/${category1}`)//.forEach(command => {
+      let category = fs.readdirSync(path.resolve(__dirname, `../${category1}`))//.forEach(command => {
         //command = require(`../${categories[categories.indexOf(args[0])]}/${command}`)
         //CategoryEmbed.addField(`${prefix}${command.name}`, (command.desc || command.description))
       //})

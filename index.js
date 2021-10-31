@@ -6,6 +6,7 @@ const mongoose = require(`mongoose`);
 const { Util } = require("./util/util.js");
 require(`dotenv`).config();
 require(`./util/functions.js`).Addons(client)
+const path = require(`path`);
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
 
 client.on(`ready`, async () => {
@@ -26,8 +27,8 @@ client.on(`ready`, async () => {
 client.logs = new Collection();
 client.commands = new Collection();
 client.aliases = new Collection();
-fs.readdirSync('./commands').forEach(dir => {
-  const commands = fs.readdirSync(`./commands/${dir}`).filter(file => file.endsWith(".js"))
+fs.readdirSync(path.resolve(__dirname, `./commands`)).forEach(dir => {
+  const commands = fs.readdirSync(path.resolve(__dirname, `./commands/${dir}`)).filter(file => file.endsWith(".js"))
   for (let file of commands) {
     let command = require(`./commands/${dir}/${file}`)
     const name = command?.name
