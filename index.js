@@ -46,11 +46,11 @@ client.on(`messageCreate`, async message => {
     await new Settings({
       dev: `221403951700901888`,
       GuildID: message.guild.id,
-      prefix: process.env.PREFIX,
+      prefix: process.env.PREFIX2,
     }).save()
     settings = {
       dev: `221403951700901888`,
-      prefix: process.env.PREFIX,
+      prefix: process.env.PREFIX2,
     }
   } else {
     settings = settings[0]
@@ -139,4 +139,4 @@ client.on(`messageCreate`, async message => {
 	}
 })
 
-client.login(process.env.TOKEN) //ODMxNzk2MjIxNjM4NjA2ODY4.YHacmQ.y8eP88-M1Dy3yNSgUe7jL-Qsv0s
+client.login(process.env.TOKEN2) //ODMxNzk2MjIxNjM4NjA2ODY4.YHacmQ.y8eP88-M1Dy3yNSgUe7jL-Qsv0s
