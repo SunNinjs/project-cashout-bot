@@ -94,6 +94,61 @@ class Util extends EventEmitter {
     this.errors = Errors
 
     this.embeds = {
+      WebHookMes(prices) {
+        const Emb = new MessageEmbed()
+        .setColor(`#0fffbf`)
+        .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`)
+        .setTimestamp()
+        .setTitle(`TODAY'S PRICES`)
+        //.setThumbnail(`https://cdn.discordapp.com/attachments/896630033886613517/899866069777416222/unknown.png`)
+        .setDescription(`__Prices are locked in once you ship them out to us.__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\n__Members will have the option to choose between express shipping or regular shipping.__\n\u200B`)
+        .addField(`**__Consoles:__**`, `
+> PS5 Disc - **$${prices.disc}**
+> PS5 Digital - **$${prices.digi}**
+> Xbox X - **$${prices.xbox}**
+> Switch OLED - **$${prices.oled}** (3 Minimum or with a console)
+> \u200B
+> **__Overnight Labels:__**
+> PS5 Disc - **$${prices.ov_disc}**
+> PS5 Digital - **$${prices.ov_digi}**
+> Xbox X - **$${prices.ov_xbox}**
+> Switch OLED - **$${prices.ov_oled}** (3 Minimum or with a console)
+\u200B
+        `)
+        .addField(`**Other Electronics:**`, `
+> Xbox S - **$300**
+> Ps4 Slim - **$${prices.ps4}**
+> Mario Kart 8 Switch - **$320**
+> Neon/ Grey Switch - **$250**
+> Fortnite Wildcat Switch - **$250**
+> Animal Crossing Switch - **$250**
+> Ps5/Xbox Controllers - **$30**
+> Ps5/Xbox Games - **$15**
+> Ps5 Headsets - **$50**
+> Media Remote - **$15**
+> Airpods Pro - **$140**
+> Airpods Wireless Charging - **$75**
+> Airpods Wired Charging - **$90**
+> Apple Watch Ser 6 (40mm/44mm) - **$280/$310** (no red or blue)
+> Apple Watch Ser 6 SE (40mm/44mm) - **$210/$240**
+> Apple Watch Ser 5 (40mm/44mm) - **$210/$240**
+> Apple Watch Ser 3 (40mm/44mm) - **$90/$120**
+> iPad 8 (32gb/128gb) - **$120/$300**
+> iPad Air 4 (64gb/256gb) - **$410/$510**
+> iPad Mini 5 (64gb/256gb) - **$230/$330**
+> iPad Pro 11’ V2 (128gb/256gb/512gb/1tb)  - **$400/$500/$600/$700**
+> iPad Pro 12.9’ 4th Gen (128gb/256gb/512gb/1tb) - **$450/$550/$650/$750**
+        `, false)
+        .addField(`**Referral Bonus:**`, `
+> $10 - Invite your friends, you will receive $10 for every member that makes their first sale.
+> $200 - Refer me to any of your paid cook-groups who are looking for a console cashout service. Get me connected with the owner, you will receive $200.
+
+__**Payments will be received the same packages are delivered.**__
+        `)
+        .addField(`**Payment Methods:**`, `Paypal, Zelle, Venmo, Cashapp, Applepay, BofA transfer, Chase transfer, ACH transfer, Wire transfer, Checks\n\nCheck out our discord for more details:\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)`)
+
+        return Emb
+      },
       AppleProducts() {
         let embed = new MessageEmbed()
           .setColor(`#0fffbf`)
