@@ -24,10 +24,12 @@ module.exports = {
       xbox: `705`,
       oled: `385`,
       ps4: `360`,
+      xboxs: `400`,
       ov_digi: `680`,
       ov_disc: `755`,
       ov_xbox: `715`,
-      ov_oled: `385`
+      ov_oled: `385`,
+      ov_xboxs: `400`
     }
 
     let temp = await Prices.find();
@@ -44,10 +46,12 @@ module.exports = {
         xbox: `XBOX`,
         oled: `Nitendo OLED`,
         ps4: `PS4 Slim`,
+        xboxs: `XBOX S`,
         ov_digi: `Overnight PS5 Digital`,
         ov_disc: `Overnight PS5 Disc`,
         ov_xbox: `Overnight XBOX`,
-        ov_oled: `Overnight Nitendo OLED`
+        ov_oled: `Overnight Nitendo OLED`,
+        ov_xboxs: `XBOX S`,
       }
 
       let newt = temp ? change[`ov_${temp}`] : change[type]
@@ -83,6 +87,8 @@ module.exports = {
       prices.ps4 = price;
     } else if (action == `oled`) {
       prices.oled = price;
+    } else if (action == `xboxs`) {
+      prices.xboxs = price;
     } else if (action == `next`) {
 
       if (!args[2]) return message.channel.send({ embeds: [client.embeds.NoArgument()] });
@@ -107,10 +113,13 @@ module.exports = {
           temp2 = `oled`
           prices.ov_oled = price2
           break;
+        case "xboxs":
+          temp2 = `xboxs`
+          prices.ov_xboxs = prices2
       }
 
     } else {
-      return message.channel.send(`Invalid type, types are\ndisc\ndigi\nxbox\nps4\noled\nnext`)
+      return message.channel.send(`Invalid type, types are\ndisc\ndigi\nxbox\nps4\noled\nxboxs\nnext`)
     }
 
     //console.log(old, prices)

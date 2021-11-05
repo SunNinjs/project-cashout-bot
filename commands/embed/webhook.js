@@ -13,7 +13,7 @@ const webhookObj = (string) => {
 
 /**
  * @param {Array<WebhookClient>} webhooks
- * @returns {Object}
+ * @returns {{ good: Array<WebhookClient>, bad: Array<String> }}
  */
 function testWebhook(webhooks) {
   let good = [];
@@ -48,7 +48,39 @@ module.exports = {
    * @returns {void} void
    */
   async execute(message, args, client) {
-    if (!args[0]) return message.channel.send({ embeds: [client.embeds.NoArgument()] })
+  
+    let helpEmbed = new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
+      .setTitle(`Command: \!webhook`)
+      .setDescription(`Sends a Message to All Webhooks`)
+      .addField(`\u200B`, `
+**\!webhook add**
+*Adds a Webhook to list*
+__Usage:__ \`\!webhook add {LINK}\`
+__Example:__ \`\!webhook add https://discord.com/api/webhooks/905197857848573993/5-1YruIvNb\`
+
+**\!webhook delete**
+*Removes a Webhook from the list*
+__Usage:__ \`\!webhook delete {LINK}\`
+__Example:__ \`\!webhook delete https://discord.com/api/webhooks/905197857848573993/5-1YruIvNb\`
+
+**\!webhook info**
+*Shows info about your Webhook List*
+__Usage:__ \`\!webhook info\`
+__Example:__ \`\!webhook info\`
+      `, true)
+      .addField(`\u200B`, `
+**\!webhook clear**
+*Clears the Webhook List*
+__Usage:__ \`\!webhook clear\`
+__Example:__ \`\!webhook clear\`
+
+**\!webhook send**
+*Sends the message to all Webhooks*
+__Usage:__ \`\!webhook send\`
+__Example:__ \`\!webhook send\`
+      `, true)
+
+    if (!args[0]) return message.channel.send({ embeds: [helpEmbed] })
 
     let action = args[0];
     let webhook = await Webhooks.findOne({ GuildID: message.guildId });
@@ -97,6 +129,7 @@ module.exports = {
         if (temp.length > 0) prices = temp[0]
 
         let Emb = client.embeds.WebHookMes(prices);
+        let count = 0;
 
         let deleted = [];
         for (let i = 0; i < webhook.webhooks.length; i++) {
@@ -104,16 +137,28 @@ module.exports = {
           let webClient;
           try {
             webClient = new WebhookClient({ url: web });
+            count++
             await webClient.send({ embeds: [Emb], content: `@everyone`, avatarURL: client.user.avatarURL({ dynamic: true }), username: client.user.username }).catch(err => {
+              count--
               deleted.push(web)
             })
           } catch (err) {
             deleted.push(web)
           }
         }
-        message.channel.send(`**All Messages have Been Sent**`);
+        message.channel.send(`**All Messages have Been Sent**\n*${count} messages sent*`);
         deleted.length > 0 ? message.channel.send(`Webhooks that couldn't be sent\n\`\`\`\n${deleted.join(`\n`)}\n\`\`\``) : null;
         break;
+      case "info":
+        let infoEmbed = new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
+          .setTitle(`Webhooks Info`)
+
+        let tested = testWebhook(webhook.webhooks);
+        infoEmbed.addField(`**Webhooks:**`, tested.good.map((ele, i) => `**${i+1}.)** *${ele.id}* - [URL](${ele.url})`).join(`\n`) || `None`)
+        message.channel.send({ embeds: [infoEmbed] })
+        break;
+      default:
+        return message.channel.send(`**Invalid Sub Command**`)
     }
 
   }

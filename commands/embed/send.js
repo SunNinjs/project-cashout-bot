@@ -35,10 +35,12 @@ module.exports = {
       xbox: `705`,
       oled: `385`,
       ps4: `360`,
+      xboxs: `405`,
       ov_digi: `680`,
       ov_disc: `755`,
       ov_xbox: `715`,
-      ov_oled: `385`
+      ov_oled: `385`,
+      ov_xboxs: `400`,
     }
 
     let temp = await Prices.find();
@@ -65,7 +67,7 @@ module.exports = {
 \u200B
       `)
       .addField(`**Other Electronics:**`, `
-> Xbox S - **$300**
+> Xbox S - **$${prices.xboxs}**
 > Ps4 Slim - **$${prices.ps4}**
 > Mario Kart 8 Switch - **$320**
 > Neon/ Grey Switch - **$250**

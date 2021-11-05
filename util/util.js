@@ -116,7 +116,7 @@ class Util extends EventEmitter {
 \u200B
         `)
         .addField(`**Other Electronics:**`, `
-> Xbox S - **$300**
+> Xbox S - **$${prices.xboxs}**
 > Ps4 Slim - **$${prices.ps4}**
 > Mario Kart 8 Switch - **$320**
 > Neon/ Grey Switch - **$250**
