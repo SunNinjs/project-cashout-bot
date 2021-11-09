@@ -139,10 +139,12 @@ __Example:__ \`\!webhook send\`
             webClient = new WebhookClient({ url: web });
             count++
             await webClient.send({ embeds: [Emb], content: `@everyone`, avatarURL: client.user.avatarURL({ dynamic: true }), username: client.user.username }).catch(err => {
+              console.log(err)
               count--
               deleted.push(web)
             })
           } catch (err) {
+            console.log(err)
             deleted.push(web)
           }
         }

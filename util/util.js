@@ -138,10 +138,11 @@ class Util extends EventEmitter {
 > iPad Mini 5 (64gb/256gb) - **$230/$330**
 > iPad Pro 11’ V2 (128gb/256gb/512gb/1tb)  - **$400/$500/$600/$700**
 > iPad Pro 12.9’ 4th Gen (128gb/256gb/512gb/1tb) - **$450/$550/$650/$750**
-
+        `, false)
+        .addField(`\u200B`, `
 🏷 __**Members will have the option to choose between express shipping or regular shipping.**__
 💵 __Payments will be received the SAME DAY packages are delivered.__
-        `, false)
+        `)
         .addField(`**Payment Methods:**`, `Paypal, Zelle, Venmo, Cashapp, Applepay, BofA transfer, Chase transfer, ACH transfer, Wire transfer, Checks\n\nCheck out our discord for more details:\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)`)
 
         return Emb
