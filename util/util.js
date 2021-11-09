@@ -140,7 +140,7 @@ class Util extends EventEmitter {
 > iPad Pro 12.9’ 4th Gen (128gb/256gb/512gb/1tb) - **$450/$550/$650/$750**
         `, false)
         .addField(`\u200B`, `
-🏷 __**Members will have the option to choose between express shipping or regular shipping.**__
+🏷 __Members will have the option to choose between express shipping or regular shipping.__
 
 💵 __**Payments will be received the same day packages are delivered.**__
         `)
