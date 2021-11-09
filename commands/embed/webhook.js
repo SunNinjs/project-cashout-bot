@@ -119,6 +119,7 @@ __Example:__ \`\!webhook send #partnerships\`
         if (webhook.webhooks.includes(args[1])) return message.channel.send(`**Webhook Already Added**`)
         let test = testWebhook([args[1]]);
         if (test.bad.length > 0) return message.channel.send(`**Invalid Webhook**`)
+        console.log(args[1])
         webhook.webhooks.push(args[1])
         await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { webhooks: webhook.webhooks })
         message.channel.send(`**Webhook Has Been Added**`)
@@ -190,6 +191,7 @@ __Example:__ \`\!webhook send #partnerships\`
           if (!channel) return message.channel.send(`**Invalid Channel**`);
           let name = webnames[Math.floor(Math.random()*webnames.length)];
           let webho = await channel.createWebhook(name, { avatar: client.user.avatarURL({ dynamic: true }), reason: `Created by ${message.author.username}` });
+          console.log(webho.url)
           message.author.send({ embeds: [ 
             new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
               .setTitle(`Webhook Created`)
