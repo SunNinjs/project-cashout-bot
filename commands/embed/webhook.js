@@ -37,7 +37,7 @@ function testWebhook(webhooks) {
 
 module.exports = {
   name: `webhook`,
-  cooldown: 5,
+  cooldown: 0,
   desc: `Sends a message to all webhooks`,
   sRoles: [`A`, `owner`],
     /**
@@ -94,6 +94,7 @@ __Example:__ \`\!webhook send\`
     switch (action.toLowerCase()) {
       case "add":
         if (!args[1]) return message.channel.send({ embeds: [client.embeds.NoArgument()] })
+        if (webhook.webhooks.includes(args[1])) return message.channel.send(`**Webhook Already Added**`)
         let test = testWebhook([args[1]]);
         if (test.bad.length > 0) return message.channel.send(`**Invalid Webhook**`)
         webhook.webhooks.push(args[1])
