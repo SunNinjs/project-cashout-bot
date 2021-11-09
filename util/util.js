@@ -101,7 +101,7 @@ class Util extends EventEmitter {
         .setTimestamp()
         .setTitle(`TODAY'S PRICES`)
         //.setThumbnail(`https://cdn.discordapp.com/attachments/896630033886613517/899866069777416222/unknown.png`)
-        .setDescription(`__Prices are locked in once you ship them out to us.__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\n__Members will have the option to choose between express shipping or regular shipping.__\n\u200B`)
+        .setDescription(`__Prices are locked in once you ship them out to us.__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\u200B`)
         .addField(`**__Consoles:__**`, `
 > PS5 Disc - **$${prices.disc}**
 > PS5 Digital - **$${prices.digi}**
@@ -138,13 +138,10 @@ class Util extends EventEmitter {
 > iPad Mini 5 (64gb/256gb) - **$230/$330**
 > iPad Pro 11’ V2 (128gb/256gb/512gb/1tb)  - **$400/$500/$600/$700**
 > iPad Pro 12.9’ 4th Gen (128gb/256gb/512gb/1tb) - **$450/$550/$650/$750**
-        `, false)
-        .addField(`**Referral Bonus:**`, `
-> $10 - Invite your friends, you will receive $10 for every member that makes their first sale.
-> $200 - Refer me to any of your paid cook-groups who are looking for a console cashout service. Get me connected with the owner, you will receive $200.
 
-__**Payments will be received the same packages are delivered.**__
-        `)
+🏷 __**Members will have the option to choose between express shipping or regular shipping.**__
+💵 __Payments will be received the SAME DAY packages are delivered.__
+        `, false)
         .addField(`**Payment Methods:**`, `Paypal, Zelle, Venmo, Cashapp, Applepay, BofA transfer, Chase transfer, ACH transfer, Wire transfer, Checks\n\nCheck out our discord for more details:\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)`)
 
         return Emb
