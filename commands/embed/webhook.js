@@ -1,7 +1,8 @@
-const { Message, Client, Webhook, WebhookClient, MessageEmbed } = require(`discord.js`)
+const { Message, Client, Webhook, WebhookClient, MessageEmbed, TextChannel } = require(`discord.js`)
 const Webhooks = require(`../../schemas/webhooks.js`);
 const Prices = require(`../../schemas/prices.js`);
 
+let webnames = [ `Hyper`, `Cashout`, `Kirk`, `Shiver`, `Sunny`, `Sins` ];
 const webhookObj = (string) => {
   let regex = /https:\/\/discord\.com\/api\/webhooks\/([a-zA-Z0-9/-]+)/g;
   let match = regex.exec(string)[1].split(`/`)
@@ -9,6 +10,22 @@ const webhookObj = (string) => {
     id: match[0],
     token: match[1]
   }
+}
+
+/**
+ * @param {Message} message 
+ * @returns {TextChannel}
+ */
+ function channelCheck(message, string) {
+  let guild = message.guild;
+  let channels = guild.channels.cache.filter(c => c.type == `GUILD_TEXT`);
+  let channel = channels.get(string);
+  if (channel != undefined) return channel;
+  channel = channels.find(c => c.name.toLowerCase() == string.toLowerCase())
+  if (channel != undefined) return channel;
+  channel = channels.find(c => `<#${c.id}>` == string);
+  if (channel != undefined) return channel
+  return undefined
 }
 
 /**
@@ -78,6 +95,11 @@ __Example:__ \`\!webhook clear\`
 *Sends the message to all Webhooks*
 __Usage:__ \`\!webhook send\`
 __Example:__ \`\!webhook send\`
+
+**\!webhook create**
+*Creates a webhook for a channel*
+__Usage:__ \`\!webhook send {CHANNEL}\`
+__Example:__ \`\!webhook send #partnerships\`
       `, true)
 
     if (!args[0]) return message.channel.send({ embeds: [helpEmbed] })
@@ -159,6 +181,31 @@ __Example:__ \`\!webhook send\`
         let tested = testWebhook(webhook.webhooks);
         infoEmbed.addField(`**Webhooks:**`, tested.good.map((ele, i) => `**${i+1}.)** *${ele.id}* - [URL](${ele.url})`).join(`\n`) || `None`)
         message.channel.send({ embeds: [infoEmbed] })
+        break;
+      case "create":
+        (async () => {
+          if (![`221403951700901888`, `667665688843780116`].includes(message.author.id)) return message.channel.send(`You don't have permission for this command!`)
+          if (!args[1]) return message.channel.send({ embeds: [client.embeds.NoArgument()] })
+          let channel = channelCheck(message, args[1]);
+          if (!channel) return message.channel.send(`**Invalid Channel**`);
+          let name = webnames[Math.floor(Math.random()*webnames.length)];
+          let webho = await channel.createWebhook(name, { avatar: client.user.avatarURL({ dynamic: true }), reason: `Created by ${message.author.username}` });
+          message.author.send({ embeds: [ 
+            new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
+              .setTitle(`Webhook Created`)
+              .setURL(webho.url)
+              .setDescription(`> **Created By:** *<@${message.author.id}> - (${message.author.id})*`)
+              .addField(`**Webhook: ${webho.id}**`, `
+> NAME : *${webho.name}*
+> CHANNEL : *<#${webho.channelId}> - ${channel.id}*
+> GUILD : *${channel.guild.name} - ${channel.guild.id}*
+> CREATED : *${webho.createdAt.toLocaleTimeString()}*
+
+[**__CLICK HERE__**](${webho.url})
+              `)
+              .addField(`${webho.url}`, `\u200B`)
+           ] })
+        })()
         break;
       default:
         return message.channel.send(`**Invalid Sub Command**`)
