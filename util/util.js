@@ -141,7 +141,8 @@ class Util extends EventEmitter {
         `, false)
         .addField(`\u200B`, `
 🏷 __**Members will have the option to choose between express shipping or regular shipping.**__
-💵 __Payments will be received the SAME DAY packages are delivered.__
+
+💵 __**Payments will be received the same day packages are delivered.**__
         `)
         .addField(`**Payment Methods:**`, `Paypal, Zelle, Venmo, Cashapp, Applepay, BofA transfer, Chase transfer, ACH transfer, Wire transfer, Checks\n\nCheck out our discord for more details:\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)`)
 
