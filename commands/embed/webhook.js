@@ -162,7 +162,7 @@ __Example:__ \`\!webhook send #partnerships\`
           try {
             webClient = new WebhookClient({ url: web });
             count++
-            await webClient.send({ embeds: [Emb], content: `@everyone`, avatarURL: client.user.avatarURL({ dynamic: true }), username: client.user.username }).catch(err => {
+            await webClient.send({ embeds: [Emb], avatarURL: client.user.avatarURL({ dynamic: true }), username: client.user.username }).catch(err => {
               console.log(err)
               count--
               deleted.push(web)
