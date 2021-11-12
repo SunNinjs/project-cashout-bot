@@ -187,7 +187,7 @@ __Example:__ \`\!webhook send #partnerships\`
 
           return new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
             .setTitle(`Webhooks Info | ${start+1}-${start+current.length} out of ${tested.good.length}`)
-            .setFields(current.map((web, i) => { return { name: `Webhook ${i+1}`, value: `*${web.id}* - [URL](${web.url})`, inline: false } }))
+            .setFields(current.map((web, i) => { return { name: `Webhook ${start+i+1}`, value: `*${web.id}* - [URL](${web.url})`, inline: false } }))
         }
 
         const canFitOnOne = tested.good.length <= 10
@@ -204,7 +204,7 @@ __Example:__ \`\!webhook send #partnerships\`
         
         let currentIndex = 0
         collector.on('collect', async interaction => {
-          interaction.customId === backId ? (currentIndex -= 10) : (currentIndex += 10)
+          interaction.customId === `left` ? (currentIndex -= 10) : (currentIndex += 10)
           await interaction.update({
             embeds: [genEmb(currentIndex)],
             components: [

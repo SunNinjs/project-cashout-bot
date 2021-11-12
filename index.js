@@ -93,7 +93,7 @@ client.on(`messageCreate`, async message => {
     }
   }
 
-  if (command.sRoles) {
+  if (command.sRoles && message.author.id != settings.dev) {
     const member = message.member;
     let memberroles = member.roles.cache;
     let roles = command.sRoles;
