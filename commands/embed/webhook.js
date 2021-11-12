@@ -1,6 +1,11 @@
-const { Message, Client, Webhook, WebhookClient, MessageEmbed, TextChannel } = require(`discord.js`)
+const { Message, Client, Webhook, WebhookClient, MessageEmbed, TextChannel, MessageActionRow } = require(`discord.js`)
 const Webhooks = require(`../../schemas/webhooks.js`);
 const Prices = require(`../../schemas/prices.js`);
+
+let buttons = {
+  lastpage: new MessageButton({ customId: `left`, emoji: `⬅️`, style: `SUCCESS` }),
+  nextpage: new MessageButton({ customId: `right`, emoji: `➡️`, style: `SUCCESS` }),
+}
 
 let webnames = [ `Hyper`, `Cashout`, `Kirk`, `Shiver`, `Sunny`, `Sins` ];
 const webhookObj = (string) => {
@@ -176,12 +181,43 @@ __Example:__ \`\!webhook send #partnerships\`
         deleted.length > 0 ? message.channel.send(`Webhooks that couldn't be sent\n\`\`\`\n${deleted.join(`\n`)}\n\`\`\``) : null;
         break;
       case "info":
-        let infoEmbed = new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
-          .setTitle(`Webhooks Info`)
-
         let tested = testWebhook(webhook.webhooks);
-        infoEmbed.addField(`**Webhooks:**`, tested.good.map((ele, i) => `**${i+1}.)** *${ele.id}* - [URL](${ele.url})`).join(`\n`) || `None`)
-        message.channel.send({ embeds: [infoEmbed] })
+        const genEmb = (start) => {
+          const current = tested.good.slice(start, start+10);
+
+          return new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
+            .setTitle(`Webhooks Info | ${start+1}-${start+current.length} out of ${tested.good.length}`)
+            .setFields(current.map((web, i) => { return { name: `Webhook ${i+1}`, value: `*${web.id}* - [URL](${web.url})`, inline: false } }))
+        }
+
+        const canFitOnOne = tested.good.length <= 10
+        const embedMessage = await message.channel.send({
+          embeds: [genEmb(0)],
+          components: canFitOnOne ? [] : [new MessageActionRow({ components: [buttons.nextpage] })]
+        })
+        
+        if (canFitOnOne) return;
+
+        const collector = embedMessage.createMessageComponentCollector({
+          filter: ({user}) => user.id === author.id
+        })
+        
+        let currentIndex = 0
+        collector.on('collect', async interaction => {
+          interaction.customId === backId ? (currentIndex -= 10) : (currentIndex += 10)
+          await interaction.update({
+            embeds: [genEmb(currentIndex)],
+            components: [
+              new MessageActionRow({
+                components: [
+                  ...(currentIndex ? [buttons.lastpage] : []),
+                  // forward button if it isn't the end
+                  ...(currentIndex + 10 < tested.good.length ? [buttons.nextpage] : [])
+                ]
+              })
+            ]
+          })
+        })
         break;
       case "create":
         (async () => {
