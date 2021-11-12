@@ -199,7 +199,7 @@ __Example:__ \`\!webhook send #partnerships\`
         if (canFitOnOne) return;
 
         const collector = embedMessage.createMessageComponentCollector({
-          filter: ({user}) => user.id === author.id
+          filter: ({user}) => user.id === message.author.id
         })
         
         let currentIndex = 0
