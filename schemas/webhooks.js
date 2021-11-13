@@ -20,9 +20,14 @@ const reqBoolen = {
   required: true
 }
 
+const reqObject = {
+  type: Object,
+  required: true
+}
+
 const welcomeSchema = mongoose.Schema({
   GuildID: reqString,
-  webhooks: reqArray,
+  list: reqObject,
 })
 
 module.exports = mongoose.model('webhooks', welcomeSchema)

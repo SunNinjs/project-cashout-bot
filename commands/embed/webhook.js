@@ -1,6 +1,7 @@
 const { Message, Client, Webhook, WebhookClient, MessageEmbed, TextChannel, MessageActionRow, MessageButton} = require(`discord.js`)
 const Webhooks = require(`../../schemas/webhooks.js`);
 const Prices = require(`../../schemas/prices.js`);
+const fetch = require(`node-fetch`);
 
 let buttons = {
   lastpage: new MessageButton({ customId: `left`, emoji: `⬅️`, style: `SUCCESS` }),
@@ -71,6 +72,18 @@ module.exports = {
    */
   async execute(message, args, client) {
   
+    let prices = {
+      digi: `670`,
+      disc: `730`,
+      xbox: `705`,
+      oled: `385`,
+      ps4: `360`,
+      ov_digi: `680`,
+      ov_disc: `755`,
+      ov_xbox: `715`,
+      ov_oled: `385`
+    }
+
     let helpEmbed = new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
       .setTitle(`Command: \!webhook`)
       .setDescription(`Sends a Message to All Webhooks`)
@@ -89,6 +102,11 @@ __Example:__ \`\!webhook delete https://discord.com/api/webhooks/905197857848573
 *Shows info about your Webhook List*
 __Usage:__ \`\!webhook info\`
 __Example:__ \`\!webhook info\`
+
+**\!webhook preview**
+*Shows a preview of the Webhook Message*
+__Usage:__ \`\!webhook preview\`
+__Example:__ \`\!webhook preview\`
       `, true)
       .addField(`\u200B`, `
 **\!webhook clear**
@@ -114,45 +132,35 @@ __Example:__ \`\!webhook send #partnerships\`
     if (webhook == undefined) {
       webhook = await Webhooks({
         GuildID: message.guildId,
-        webhooks: []
+        list: []
       }).save()
     }
+
+    let URLlist = webhook.list.map(ele => ele.url)
 
     switch (action.toLowerCase()) {
       case "add":
         if (!args[1]) return message.channel.send({ embeds: [client.embeds.NoArgument()] })
-        if (webhook.webhooks.includes(args[1])) return message.channel.send(`**Webhook Already Added**`)
+        if (URLlist.includes(args[1])) return message.channel.send(`**Webhook Already Added**`)
         let test = testWebhook([args[1]]);
         if (test.bad.length > 0) return message.channel.send(`**Invalid Webhook**`)
         console.log(args[1])
-        webhook.webhooks.push(args[1])
-        await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { webhooks: webhook.webhooks })
+        webhook.list.push({ url: args[1], messages: [] })
+        await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { list: webhook.list })
         message.channel.send(`**Webhook Has Been Added**`)
         break;
       case "delete":
         if (!args[1]) return message.channel.send({ embeds: [client.embeds.NoArgument()] })
-        if (!webhook.webhooks.includes(args[1])) return message.channel.send(`**Webhook Could not Be Found**`)
-        webhook.webhooks.slice(webhook.webhooks.indexOf(args[1]) , 1)
-        await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { webhooks: webhook.webhooks })
+        if (!URLlist.includes(args[1])) return message.channel.send(`**Webhook Could not Be Found**`)
+        webhook.list.slice(URLlist.indexOf(args[1]), 1)
+        await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { list: webhook.list })
         message.channel.send(`**Webhook Has Been Deleted**`)
         break;
       case "clear":
-        await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { webhooks: [] })
+        await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { list: [] })
         message.channel.send(`**Webhooks Have Been Cleared**`)
         break;
       case "send":
-
-        let prices = {
-          digi: `670`,
-          disc: `730`,
-          xbox: `705`,
-          oled: `385`,
-          ps4: `360`,
-          ov_digi: `680`,
-          ov_disc: `755`,
-          ov_xbox: `715`,
-          ov_oled: `385`
-        }
     
         let temp = await Prices.find();
         if (temp.length > 0) prices = temp[0]
@@ -161,17 +169,21 @@ __Example:__ \`\!webhook send #partnerships\`
         let count = 0;
 
         let deleted = [];
-        for (let i = 0; i < webhook.webhooks.length; i++) {
-          let web = webhook.webhooks[i];
+        for (let i = 0; i < webhook.list.length; i++) {
+          let web = webhook.list[i];
           let webClient;
           try {
-            webClient = new WebhookClient({ url: web });
+            webClient = new WebhookClient({ url: web.url });
             count++
-            await webClient.send({ embeds: [Emb], avatarURL: client.user.avatarURL({ dynamic: true }), username: client.user.username }).catch(err => {
+            let mes = await webClient.send({ embeds: [Emb], avatarURL: client.user.avatarURL({ dynamic: true }), username: client.user.username }).catch(err => {
               console.log(err)
               count--
               deleted.push(web)
             })
+            if (mes.id) {
+              webhook.list[i].messages.push(mes.id)
+              await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { list: webhook.list })
+            }
           } catch (err) {
             console.log(err)
             deleted.push(web)
@@ -181,7 +193,7 @@ __Example:__ \`\!webhook send #partnerships\`
         deleted.length > 0 ? message.channel.send(`Webhooks that couldn't be sent\n\`\`\`\n${deleted.join(`\n`)}\n\`\`\``) : null;
         break;
       case "info":
-        let tested = testWebhook(webhook.webhooks);
+        let tested = testWebhook(URLlist);
         const genEmb = (start) => {
           const current = tested.good.slice(start, start+10);
 
@@ -245,6 +257,14 @@ __Example:__ \`\!webhook send #partnerships\`
            ] })
         })()
         break;
+      case "preview":
+        (async () => {
+          let temp = await Prices.find();
+          if (temp.length > 0) prices = temp[0]
+  
+          message.channel.send({ content: `PREVIEW`, embeds: [client.embeds.WebHookMes(prices)] })
+        })()
+        break
       default:
         return message.channel.send(`**Invalid Sub Command**`)
     }
