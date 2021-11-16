@@ -36,6 +36,7 @@ module.exports = {
       oled: `385`,
       ps4: `360`,
       xboxs: `405`,
+      xboxhalo: `860`,
       ov_digi: `680`,
       ov_disc: `755`,
       ov_xbox: `715`,
@@ -57,6 +58,7 @@ module.exports = {
 > PS5 Disc - **$${prices.disc}**
 > PS5 Digital - **$${prices.digi}**
 > Xbox X - **$${prices.xbox}**
+> Xbox X Halo - **$${prices.xboxhalo}**
 > Switch OLED - **$${prices.oled}** (3 Minimum or with a console)
 > \u200B
 > **__Overnight Labels:__**

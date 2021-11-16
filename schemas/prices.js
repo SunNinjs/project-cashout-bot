@@ -32,6 +32,7 @@ const welcomeSchema = mongoose.Schema({
   oled: reqString,
   ps4: reqString,
   xboxs: reqString,
+  xboxhalo: reqString,
   ov_digi: reqString,
   ov_disc: reqString,
   ov_xbox: reqString,

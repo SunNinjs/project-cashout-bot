@@ -25,6 +25,7 @@ module.exports = {
       oled: `385`,
       ps4: `360`,
       xboxs: `400`,
+      xboxhalo: `860`,
       ov_digi: `680`,
       ov_disc: `755`,
       ov_xbox: `715`,
@@ -47,6 +48,7 @@ module.exports = {
         oled: `Nitendo OLED`,
         ps4: `PS4 Slim`,
         xboxs: `XBOX S`,
+        xboxhalo: `XBOX Halo`,
         ov_digi: `Overnight PS5 Digital`,
         ov_disc: `Overnight PS5 Disc`,
         ov_xbox: `Overnight XBOX`,
@@ -89,6 +91,8 @@ module.exports = {
       prices.oled = price;
     } else if (action == `xboxs`) {
       prices.xboxs = price;
+    } else if (action == `xboxhalo`) {
+      prices.xboxhalo = price;
     } else if (action == `next`) {
 
       if (!args[2]) return message.channel.send({ embeds: [client.embeds.NoArgument()] });
