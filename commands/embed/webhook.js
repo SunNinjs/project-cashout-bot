@@ -78,10 +78,14 @@ module.exports = {
       xbox: `705`,
       oled: `385`,
       ps4: `360`,
+      xboxs: `405`,
+      xboxhalo: `860`,
       ov_digi: `680`,
       ov_disc: `755`,
       ov_xbox: `715`,
-      ov_oled: `385`
+      ov_oled: `385`,
+      ov_xboxs: `400`,
+      ov_xboxhalo: `700`,
     }
 
     let helpEmbed = new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()

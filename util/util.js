@@ -106,25 +106,27 @@ class Util extends EventEmitter {
 > PS5 Disc - **$${prices.disc}**
 > PS5 Digital - **$${prices.digi}**
 > Xbox X - **$${prices.xbox}**
+> Xbox X Halo - **$${prices.xboxhalo}**
 > Switch OLED - **$${prices.oled}** (3 Minimum or with a console)
+> Ps4 Slim - **$${prices.ps4}**
 > \u200B
 > **__Overnight Labels:__**
 > PS5 Disc - **$${prices.ov_disc}**
 > PS5 Digital - **$${prices.ov_digi}**
 > Xbox X - **$${prices.ov_xbox}**
-> Switch OLED - **$${prices.ov_oled}** (3 Minimum or with a console)
+> Xbox X Halo - **$${prices.ov_xboxhalo}**
 \u200B
         `)
         .addField(`**Other Electronics:**`, `
+> Pokémon Switch Lite - **$215** (minimum 3 or with a console)
 > Xbox S - **$${prices.xboxs}**
-> Ps4 Slim - **$${prices.ps4}**
+> Ps5/Xbox Controllers - **$30**
+> Ps5/Xbox Games - **$15**
+> Ps5 Headsets - **$50**
 > Mario Kart 8 Switch - **$320**
 > Neon/ Grey Switch - **$250**
 > Fortnite Wildcat Switch - **$250**
 > Animal Crossing Switch - **$250**
-> Ps5/Xbox Controllers - **$30**
-> Ps5/Xbox Games - **$15**
-> Ps5 Headsets - **$50**
 > Media Remote - **$15**
 > Airpods Pro - **$140**
 > Airpods Wireless Charging - **$75**
@@ -145,7 +147,7 @@ class Util extends EventEmitter {
 💵 __Payments will be received the **same day** packages are delivered.__
 \u200B
         `)
-        .addField(`**Payment Methods:**`, `Paypal, Zelle, Venmo, Cashapp, Applepay, BofA transfer, Chase transfer, ACH transfer, Wire transfer, Checks\n\nCheck out our discord for more details:\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)`)
+        .addField(`**Payment Methods:**`, `Paypal, Zelle, Venmo, Cashapp, Applepay, BofA transfer, Chase transfer, ACH transfer, Wire transfer, Checks\n\n**Check out our discord for more details:**\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)`)
 
         return Emb
       },
