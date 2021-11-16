@@ -38,6 +38,7 @@ const welcomeSchema = mongoose.Schema({
   ov_xbox: reqString,
   ov_oled: reqString,
   ov_xboxs: reqString,
+  ov_xboxhalo: reqString,
 })
 
 module.exports = mongoose.model('prices', welcomeSchema)

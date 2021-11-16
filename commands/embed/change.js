@@ -30,7 +30,8 @@ module.exports = {
       ov_disc: `755`,
       ov_xbox: `715`,
       ov_oled: `385`,
-      ov_xboxs: `400`
+      ov_xboxs: `400`,
+      ov_xboxhalo: `700`,
     }
 
     let temp = await Prices.find();
@@ -53,7 +54,8 @@ module.exports = {
         ov_disc: `Overnight PS5 Disc`,
         ov_xbox: `Overnight XBOX`,
         ov_oled: `Overnight Nitendo OLED`,
-        ov_xboxs: `XBOX S`,
+        ov_xboxs: `Overnight XBOX S`,
+        ov_xboxhalo: `Overnight XBOX X Halo`,
       }
 
       let newt = temp ? change[`ov_${temp}`] : change[type]
@@ -119,7 +121,10 @@ module.exports = {
           break;
         case "xboxs":
           temp2 = `xboxs`
-          prices.ov_xboxs = prices2
+          prices.ov_xboxs = price2
+        case "xboxhalo":
+          temp2 = `xboxhalo`
+          prices.ov_xboxhalo = price2
       }
 
     } else {
