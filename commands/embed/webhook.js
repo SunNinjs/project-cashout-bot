@@ -179,7 +179,7 @@ __Example:__ \`\!webhook send #partnerships\`
           try {
             webClient = new WebhookClient({ url: web.url });
             count++
-            let mes = await webClient.send({ embeds: [Emb], avatarURL: client.user.avatarURL({ dynamic: true }), username: client.user.username }).catch(err => {
+            let mes = await webClient.send({ content: `https://discord.gg/bGbkTpkChY`, embeds: [Emb], avatarURL: client.user.avatarURL({ dynamic: true }), username: client.user.username }).catch(err => {
               console.log(err)
               count--
               deleted.push(web)
@@ -266,7 +266,7 @@ __Example:__ \`\!webhook send #partnerships\`
           let temp = await Prices.find();
           if (temp.length > 0) prices = temp[0]
   
-          message.channel.send({ content: `PREVIEW`, embeds: [client.embeds.WebHookMes(prices)] })
+          message.channel.send({ content: `PREVIEW\nhttps://discord.gg/bGbkTpkChY`, embeds: [client.embeds.WebHookMes(prices)] })
         })()
         break
       default:
