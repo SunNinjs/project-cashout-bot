@@ -128,18 +128,6 @@ class Util extends EventEmitter {
 > Fortnite Wildcat Switch - **$250**
 > Animal Crossing Switch - **$250**
 > Media Remote - **$15**
-> Airpods Pro - **$140**
-> Airpods Wireless Charging - **$75**
-> Airpods Wired Charging - **$90**
-> Apple Watch Ser 6 (40mm/44mm) - **$280/$310** (no red or blue)
-> Apple Watch Ser 6 SE (40mm/44mm) - **$210/$240**
-> Apple Watch Ser 5 (40mm/44mm) - **$210/$240**
-> Apple Watch Ser 3 (40mm/44mm) - **$90/$120**
-> iPad 8 (32gb/128gb) - **$120/$300**
-> iPad Air 4 (64gb/256gb) - **$410/$510**
-> iPad Mini 5 (64gb/256gb) - **$230/$330**
-> iPad Pro 11’ V2 (128gb/256gb/512gb/1tb)  - **$400/$500/$600/$700**
-> iPad Pro 12.9’ 4th Gen (128gb/256gb/512gb/1tb) - **$450/$550/$650/$750**
         `, false)
         .addField(`\u200B`, `
 🏷 __Members will have the option to choose between express shipping or regular shipping.__
