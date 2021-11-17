@@ -171,11 +171,14 @@ __Example:__ \`\!webhook send #partnerships\`
 
         let Emb = client.embeds.WebHookMes(prices);
         let count = 0;
-
         let deleted = [];
-        for (let i = 0; i < webhook.list.length; i++) {
-          let web = webhook.list[i];
-          let webClient;
+
+        if (args[1]) {
+          let webid = args[1];
+          let token_ids = webhook.list.map(ele => webhookObj(ele));
+          let url = token_ids.find(ele => ele.id == webid)
+          if (!url) return message.channel.send(`Webhook Could Not Be Found`)
+
           try {
             webClient = new WebhookClient({ url: web.url });
             count++
@@ -184,7 +187,7 @@ __Example:__ \`\!webhook send #partnerships\`
               count--
               deleted.push(web)
             })
-            if (mes.id) {
+            if (mes?.id) {
               webhook.list[i].messages.push(mes.id)
               await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { list: webhook.list })
             }
@@ -192,7 +195,29 @@ __Example:__ \`\!webhook send #partnerships\`
             console.log(err)
             deleted.push(web)
           }
+        } else {
+          for (let i = 0; i < webhook.list.length; i++) {
+            let web = webhook.list[i];
+            let webClient;
+            try {
+              webClient = new WebhookClient({ url: web.url });
+              count++
+              let mes = await webClient.send({ content: `https://discord.gg/bGbkTpkChY`, embeds: [Emb], avatarURL: client.user.avatarURL({ dynamic: true }), username: client.user.username }).catch(err => {
+                console.log(err)
+                count--
+                deleted.push(web)
+              })
+              if (mes?.id) {
+                webhook.list[i].messages.push(mes.id)
+                await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { list: webhook.list })
+              }
+            } catch (err) {
+              console.log(err)
+              deleted.push(web)
+            }
+          }
         }
+
         message.channel.send(`**All Messages have Been Sent**\n*${count} messages sent*`);
         deleted.length > 0 ? message.channel.send(`Webhooks that couldn't be sent\n\`\`\`\n${deleted.join(`\n`)}\n\`\`\``) : null;
         break;
