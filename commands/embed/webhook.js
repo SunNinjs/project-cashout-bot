@@ -175,25 +175,25 @@ __Example:__ \`\!webhook send #partnerships\`
 
         if (args[1]) {
           let webid = args[1];
-          let token_ids = webhook.list.map(ele => webhookObj(ele));
-          let url = token_ids.find(ele => ele.id == webid)
+          let webt = webhook.list.find(ele => webhookObj(ele.url).id == webid);
+          let url = webt.url;
           if (!url) return message.channel.send(`Webhook Could Not Be Found`)
 
           try {
-            webClient = new WebhookClient({ url: web.url });
+            webClient = new WebhookClient({ url: url });
             count++
             let mes = await webClient.send({ content: `https://discord.gg/bGbkTpkChY`, embeds: [Emb], avatarURL: client.user.avatarURL({ dynamic: true }), username: client.user.username }).catch(err => {
               console.log(err)
               count--
-              deleted.push(web)
+              deleted.push(url)
             })
             if (mes?.id) {
-              webhook.list[i].messages.push(mes.id)
+              webhook.list.find(ele => ele.url == webt.url).messages.push(mes.id)
               await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { list: webhook.list })
             }
           } catch (err) {
             console.log(err)
-            deleted.push(web)
+            deleted.push(url)
           }
         } else {
           for (let i = 0; i < webhook.list.length; i++) {
