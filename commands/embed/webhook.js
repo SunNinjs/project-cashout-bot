@@ -176,8 +176,8 @@ __Example:__ \`\!webhook send #partnerships\`
         if (args[1]) {
           let webid = args[1];
           let webt = webhook.list.find(ele => webhookObj(ele.url).id == webid);
+          if (!webt) return message.channel.send(`Webhook Could Not Be Found`)
           let url = webt.url;
-          if (!url) return message.channel.send(`Webhook Could Not Be Found`)
 
           try {
             webClient = new WebhookClient({ url: url });
