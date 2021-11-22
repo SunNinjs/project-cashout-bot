@@ -34,6 +34,26 @@ const webhookObj = (string) => {
   return undefined
 }
 
+async function checkGuildnChannel(guild, list) {
+  let changed = [];
+  let left = [];
+  for (let i = 0; i < list.length; i++) {
+    let ele = list[i];
+    let copied = Object.assign({}, ele);
+    if (!ele.guild || !ele.channel) {
+      let data = await fetch(ele.url).then(async data => await data.json());
+      ele.guild = data.guild_id;
+      ele.channel = data.channel_id
+    }
+
+    if (copied.guild != ele.guild || copied.channel != ele.channel) { changed.push(ele) } else left.push(ele)
+
+  }
+
+  await Webhooks.findOneAndUpdate({ GuildID: guild }, { list: list })
+  return { updated: changed, other: left }
+}
+
 /**
  * @param {Array<WebhookClient>} webhooks
  * @returns {{ good: Array<WebhookClient>, bad: Array<String> }}
@@ -152,6 +172,15 @@ __Example:__ \`\!webhook send #partnerships\`
         webhook.list.push({ url: args[1], messages: [] })
         await Webhooks.findOneAndUpdate({ GuildID: message.guildId }, { list: webhook.list })
         message.channel.send(`**Webhook Has Been Added**`)
+        let ts = await checkGuildnChannel(message.guild.id, webhook.list);
+        //console.log(ts)
+        if (ts.updated.length > 0) {
+          message.channel.send({ embeds: [
+            new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
+              .setTitle(`Updated`)
+              .setDescription(ts.updated.map(ele => `URL: ${ele.url}\nGuild: ${ele.guild}\nChannel: ${ele.channel}\n`).join(`\n`))
+          ] })
+        }
         break;
       case "delete":
         if (!args[1]) return message.channel.send({ embeds: [client.embeds.NoArgument()] })
@@ -222,43 +251,54 @@ __Example:__ \`\!webhook send #partnerships\`
         deleted.length > 0 ? message.channel.send(`Webhooks that couldn't be sent\n\`\`\`\n${deleted.join(`\n`)}\n\`\`\``) : null;
         break;
       case "info":
-        let tested = testWebhook(URLlist);
-        const genEmb = (start) => {
-          const current = tested.good.slice(start, start+10);
-
-          return new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
-            .setTitle(`Webhooks Info | ${start+1}-${start+current.length} out of ${tested.good.length}`)
-            .setFields(current.map((web, i) => { return { name: `Webhook ${start+i+1}`, value: `*${web.id}* - [URL](${web.url})`, inline: false } }))
-        }
-
-        const canFitOnOne = tested.good.length <= 10
-        const embedMessage = await message.channel.send({
-          embeds: [genEmb(0)],
-          components: canFitOnOne ? [] : [new MessageActionRow({ components: [buttons.nextpage] })]
-        })
-        
-        if (canFitOnOne) return;
-
-        const collector = embedMessage.createMessageComponentCollector({
-          filter: ({user}) => user.id === message.author.id
-        })
-        
-        let currentIndex = 0
-        collector.on('collect', async interaction => {
-          interaction.customId === `left` ? (currentIndex -= 10) : (currentIndex += 10)
-          await interaction.update({
-            embeds: [genEmb(currentIndex)],
-            components: [
-              new MessageActionRow({
-                components: [
-                  ...(currentIndex ? [buttons.lastpage] : []),
-                  // forward button if it isn't the end
-                  ...(currentIndex + 10 < tested.good.length ? [buttons.nextpage] : [])
-                ]
-              })
-            ]
+        (async () => {
+          let tested = testWebhook(URLlist);
+          let checked = await checkGuildnChannel(message.guild.id, webhook.list);
+          if (checked.updated.length > 0) {
+            message.channel.send({ embeds: [
+              new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
+                .setTitle(`Updated`)
+                .setDescription(checked.updated.map(ele => `URL: ${ele.url}\nGuild: ${ele.guild}\nChannel: ${ele.channel}\n`).join(`\n`))
+            ] })
+          }
+          //console.log(checked)
+          const genEmb = (start) => {
+            const current = tested.good.slice(start, start+10);
+  
+            return new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
+              .setTitle(`Webhooks Info | ${start+1}-${start+current.length} out of ${tested.good.length}`)
+              .setFields(current.map((web, i) => { return { name: `Webhook ${start+i+1}`, value: `*${web.id}* - [URL](${web.url})`, inline: false } }))
+          }
+  
+          const canFitOnOne = tested.good.length <= 10
+          const embedMessage = await message.channel.send({
+            embeds: [genEmb(0)],
+            components: canFitOnOne ? [] : [new MessageActionRow({ components: [buttons.nextpage] })]
           })
-        })
+          
+          if (canFitOnOne) return;
+  
+          const collector = embedMessage.createMessageComponentCollector({
+            filter: ({user}) => user.id === message.author.id
+          })
+          
+          let currentIndex = 0
+          collector.on('collect', async interaction => {
+            interaction.customId === `left` ? (currentIndex -= 10) : (currentIndex += 10)
+            await interaction.update({
+              embeds: [genEmb(currentIndex)],
+              components: [
+                new MessageActionRow({
+                  components: [
+                    ...(currentIndex ? [buttons.lastpage] : []),
+                    // forward button if it isn't the end
+                    ...(currentIndex + 10 < tested.good.length ? [buttons.nextpage] : [])
+                  ]
+                })
+              ]
+            })
+          })
+        })()
         break;
       case "create":
         (async () => {
