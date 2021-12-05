@@ -118,13 +118,13 @@ class Util extends EventEmitter {
 \u200B
         `)
         .addField(`**Other Electronics:**`, `
-> Mario Kart 8 Switch - **$325** (3 Minimum or with a console)
+> Mario Kart 8 Switch - **$330** (3 Minimum or with a console)
 > Pokémon Switch Lite - **$215** (3 Minimum or with a console)
 > Xbox S - **$${prices.xboxs}**
 > Xbox Halo Elite Controller - **$250**
-> Ps5/Xbox Controllers - **$30**
+> Ps5/Xbox Controllers - **$35**
 > Ps5/Xbox Games - **$15**
-> Ps5 Headsets - **$50**
+> Ps5 Headsets - **$55**
 > Neon/ Grey Switch - **$250**
 > Fortnite Wildcat Switch - **$250**
 > Animal Crossing Switch - **$250**

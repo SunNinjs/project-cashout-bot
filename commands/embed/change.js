@@ -62,7 +62,7 @@ module.exports = {
 
       let updateEmbed = new MessageEmbed()
       .setColor(client.info.color)
-      .setFooter(client.info.footer)
+      .setFooter(`${client.info.footer}\n${new Date().toLocaleString()}`)
       .setTimestamp()
       .setTitle(`${newt}'s price has been changed to $${price}`)
       .setDescription(`Old price was $${temp ? old[`ov_${temp}`] : old[type]}`)
