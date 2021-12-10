@@ -26,17 +26,16 @@ Please be willing to accept multiple forms of payment due to daily limits for ea
 
 Open a ticket when your packages deliver. <#872366770898477086>
 
-__**Forms of payment:**__ We cover all fees.
->>> **Paypal** (preferred)  - *No limit*
-**Zelle** - *100k per month/5k per day*
-**Venmo** - *5k per week*
-**CashApp** - *10k per week*
-**Apple Pay** - *10k per week*
-**BoA Transfer** (preferred) - *No limit*
-**Chase Transfer** (preferred) - *No limit*
-**ACH Transfer** (preferred) - *No limit*
-**Wire Transfer** (preferred) - *No limit*
-**Checks** (deposit remotely with an image or mail it to you) - *No limit*
+__**Forms of payment:**__
+
+>>> **Ach Transfer/Wire Transfer** (preferred) - *No limit*
+**Echecks/Checks** (preferred) - *No limit (mobile deposit or deposit at the bank)*
+**Chase Transfer** (preferred) - *No limit (must have Chase)*
+**Paypal FnF/QR** - *No limit*
+**Zelle** - *$25k per week*
+**Cashapp** - *$10k per week*
+**Venmo** - *$5k per week*
+**Apple Pay** - *$10k per week*
       `)
 
     message.channel.send({ embeds: [embed] });
