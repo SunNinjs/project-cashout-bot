@@ -98,7 +98,7 @@ module.exports = {
       xbox: `705`,
       oled: `385`,
       ps4: `360`,
-      xboxs: `405`,
+      xboxs: `400`,
       xboxhalo: `860`,
       ov_digi: `680`,
       ov_disc: `755`,
@@ -106,6 +106,19 @@ module.exports = {
       ov_oled: `385`,
       ov_xboxs: `400`,
       ov_xboxhalo: `700`,
+      marioswitch: `330`,
+      pokeswitch: `215`,
+      controller: `35`,
+      halocontroller: `250`,
+      games: `15`,
+      headsets: `55`,
+      neonswitch: `250`,
+      fortniteswitch: `250`,
+      animalswitch: `250`,
+      remote: `15`,
+      airpodspro: `140`,
+      airpodswireless: `75`,
+      airpodswired: `90`
     }
 
     let helpEmbed = new MessageEmbed().setColor(client.info.color).setFooter(client.info.footer).setTimestamp()

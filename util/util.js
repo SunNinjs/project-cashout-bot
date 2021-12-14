@@ -103,32 +103,32 @@ class Util extends EventEmitter {
         //.setThumbnail(`https://cdn.discordapp.com/attachments/896630033886613517/899866069777416222/unknown.png`)
         .setDescription(`__Prices are locked in once you ship them out to us.__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\u200B`)
         .addField(`**__Consoles:__**`, `
-> PS5 Disc - **$${prices.disc}**
-> PS5 Digital - **$${prices.digi}**
-> Xbox X - **$${prices.xbox}**
-> Xbox X Halo - **$${prices.xboxhalo}**
-> Switch OLED - **$${prices.oled}** (3 Minimum or with a console)
-> Ps4 Slim - **$${prices.ps4}**
+> PS5 Disc - **${prices.disc}**
+> PS5 Digital - **${prices.digi}**
+> Xbox X - **${prices.xbox}**
+> Xbox X Halo - **${prices.xboxhalo}**
+> Switch OLED - **${prices.oled}** (3 Minimum or with a console)
+> Ps4 Slim - **${prices.ps4}**
 > \u200B
 > **__Overnight Labels:__**
-> PS5 Disc - **$${prices.ov_disc}**
-> PS5 Digital - **$${prices.ov_digi}**
-> Xbox X - **$${prices.ov_xbox}**
-> Xbox X Halo - **$${prices.ov_xboxhalo}**
+> PS5 Disc - **${prices.ov_disc}**
+> PS5 Digital - **${prices.ov_digi}**
+> Xbox X - **${prices.ov_xbox}**
+> Xbox X Halo - **${prices.ov_xboxhalo}**
 \u200B
         `)
         .addField(`**Other Electronics:**`, `
-> Mario Kart 8 Switch - **$330** (3 Minimum or with a console)
-> Pokémon Switch Lite - **$215** (3 Minimum or with a console)
-> Xbox S - **$${prices.xboxs}**
-> Xbox Halo Elite Controller - **$250**
-> Ps5/Xbox Controllers - **$35**
-> Ps5/Xbox Games - **$15**
-> Ps5 Headsets - **$55**
-> Neon/ Grey Switch - **$250**
-> Fortnite Wildcat Switch - **$250**
-> Animal Crossing Switch - **$250**
-> Media Remote - **$15**
+> Mario Kart 8 Switch - **${prices.marioswitch}** (3 Minimum or with a console)
+> Pokémon Switch Lite - **${prices.pokeswitch}** (3 Minimum or with a console)
+> Xbox S - **${prices.xboxs}**
+> Xbox Halo Elite Controller - **${prices.halocontroller}**
+> Ps5/Xbox Controllers - **${prices.controller}**
+> Ps5/Xbox Games - **${prices.games}**
+> Ps5 Headsets - **${prices.headsets}**
+> Neon/ Grey Switch - **${prices.neonswitch}**
+> Fortnite Wildcat Switch - **${prices.fortniteswitch}**
+> Animal Crossing Switch - **${prices.animalswitch}**
+> Media Remote - **${prices.remote}**
         `, false)
         .addField(`\u200B`, `
 🏷 __Members will have the option to choose between express shipping or regular shipping.__

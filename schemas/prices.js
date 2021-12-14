@@ -39,6 +39,19 @@ const welcomeSchema = mongoose.Schema({
   ov_oled: reqString,
   ov_xboxs: reqString,
   ov_xboxhalo: reqString,
+  marioswitch: reqString,
+  pokeswitch: reqString,
+  controller: reqString,
+  halocontroller: reqString,
+  games: reqString,
+  headsets: reqString,
+  neonswitch: reqString,
+  fortniteswitch: reqString,
+  animalswitch: reqString,
+  remote: reqString,
+  airpodspro: reqString,
+  airpodswireless: reqString,
+  airpodswired: reqString,
 })
 
 module.exports = mongoose.model('prices', welcomeSchema)

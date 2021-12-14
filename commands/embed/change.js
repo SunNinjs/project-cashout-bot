@@ -1,6 +1,35 @@
 const { Message, Client, MessageEmbed } = require(`discord.js`)
 const Prices = require(`../../schemas/prices.js`);
 
+let change = {
+  digi: `PS5 Digital`,
+  disc: `PS5 Disc`,
+  xbox: `XBOX`,
+  oled: `Nitendo OLED`,
+  ps4: `PS4 Slim`,
+  xboxs: `XBOX S`,
+  xboxhalo: `XBOX Halo`,
+  ov_digi: `Overnight PS5 Digital`,
+  ov_disc: `Overnight PS5 Disc`,
+  ov_xbox: `Overnight XBOX`,
+  ov_oled: `Overnight Nitendo OLED`,
+  ov_xboxs: `Overnight XBOX S`,
+  ov_xboxhalo: `Overnight XBOX X Halo`,
+  marioswitch: `Mario Kart 8 Switch`,
+  pokeswitch: `Pokémon Switch Lite`,
+  controller: `PS5/Xbox Controllers`,
+  halocontroller: `Xbox Halo Elite Controller`,
+  games: `PS5/Xbox Games`,
+  headsets: `PS5/Xbox Headsets`,
+  neonswitch: `Neon/Grey Switch`,
+  fortniteswitch: `Fortnite Wildcat Switch`,
+  animalswitch: `Animal Crossing Switch`,
+  remote: `Media Remote`,
+  airpodspro: `Airpods Pro`,
+  airpodswireless: `Airpods Wireless Charging`,
+  airpodswired: `Airpods Wired Charging`
+}
+
 module.exports = {
   name: `change`,
   cooldown: 0,
@@ -16,6 +45,17 @@ module.exports = {
   async execute(message, args, client) {
 
     if (!args[0]) return message.channel.send({ embeds: [client.embeds.NoArgument()] })
+    if (args[0].toLowerCase() == `help`) {
+      let helpembed = new MessageEmbed()
+        .setColor(client.info.color).setFooter(client.info.footer).setTimestamp()
+        .setTitle(`Price Changing Help`)
+        .setDescription(`
+**Items:**
+${Object.entries(change).map(item => `**${item[0]}** - *${item[1]}*`).join(`\n`)}
+        `)
+      
+      return message.channel.send({ embeds: [helpembed] });
+    }
     if (!args[1]) return message.channel.send({ embeds: [client.embeds.NoArgument()] })
 
     let prices = {
@@ -32,6 +72,19 @@ module.exports = {
       ov_oled: `385`,
       ov_xboxs: `400`,
       ov_xboxhalo: `700`,
+      marioswitch: `330`,
+      pokeswitch: `215`,
+      controller: `35`,
+      halocontroller: `250`,
+      games: `15`,
+      headsets: `55`,
+      neonswitch: `250`,
+      fortniteswitch: `250`,
+      animalswitch: `250`,
+      remote: `15`,
+      airpodspro: `140`,
+      airpodswireless: `75`,
+      airpodswired: `90`
     }
 
     let temp = await Prices.find();
@@ -42,21 +95,6 @@ module.exports = {
     let old = Object.assign({}, prices._doc)
 
     function embed(type, price, temp) {
-      let change = {
-        digi: `PS5 Digital`,
-        disc: `PS5 Disc`,
-        xbox: `XBOX`,
-        oled: `Nitendo OLED`,
-        ps4: `PS4 Slim`,
-        xboxs: `XBOX S`,
-        xboxhalo: `XBOX Halo`,
-        ov_digi: `Overnight PS5 Digital`,
-        ov_disc: `Overnight PS5 Disc`,
-        ov_xbox: `Overnight XBOX`,
-        ov_oled: `Overnight Nitendo OLED`,
-        ov_xboxs: `Overnight XBOX S`,
-        ov_xboxhalo: `Overnight XBOX X Halo`,
-      }
 
       let newt = temp ? change[`ov_${temp}`] : change[type]
 
@@ -64,8 +102,8 @@ module.exports = {
       .setColor(client.info.color)
       .setFooter(`${client.info.footer}\n${new Date().toLocaleString()}`)
       .setTimestamp()
-      .setTitle(`${newt}'s price has been changed to $${price}`)
-      .setDescription(`Old price was $${temp ? old[`ov_${temp}`] : old[type]}`)
+      .setTitle(`${newt}'s price has been changed to ${price}`)
+      .setDescription(`Old price was ${temp ? old[`ov_${temp}`] : old[type]}`)
     
       return updateEmbed
     }
@@ -75,60 +113,117 @@ module.exports = {
     let action = args[0].toLowerCase();
     let price = args[1].toLowerCase();
     
-    let number = action != `next` ? Number.parseInt(price) : 0;
-    if (number == NaN) return message.channel.send(`Invalid Prices\nGot '${price}', need a number`);
+    let number = action != `next` ? price : 0;
+    //if (number == NaN) return message.channel.send(`Invalid Prices\nGot '${price}', need a number`);
 
     let temp2 = undefined;
     let price2;
 
-    if (action == `disc`) {
-      prices.disc = price;
-    } else if (action == `digi`) {
-      prices.digi = price;
-    } else if (action == `xbox`) {
-      prices.xbox = price;
-    } else if (action == `ps4`) {
-      prices.ps4 = price;
-    } else if (action == `oled`) {
-      prices.oled = price;
-    } else if (action == `xboxs`) {
-      prices.xboxs = price;
-    } else if (action == `xboxhalo`) {
-      prices.xboxhalo = price;
-    } else if (action == `next`) {
-
-      if (!args[2]) return message.channel.send({ embeds: [client.embeds.NoArgument()] });
-      let secondaction = args[1].toLowerCase();
-      price2 = Number.parseInt(args[2]);
-      if (price2 == NaN) return message.channel.send(`Invalid Prices\nGot '${price2}', need a number`);
-
-      switch (secondaction) {
-        case "disc":
-          temp2 = `disc`
-          prices.ov_disc = price2;
-          break;
-        case "digi":
-          temp2 = `digi`
-          prices.ov_digi = price2;
-          break;
-        case "xbox":
-          temp2 = `xbox`
-          prices.ov_xbox = price2;
-          break;
-        case "oled":
-          temp2 = `oled`
-          prices.ov_oled = price2
-          break;
-        case "xboxs":
-          temp2 = `xboxs`
-          prices.ov_xboxs = price2
-        case "xboxhalo":
-          temp2 = `xboxhalo`
-          prices.ov_xboxhalo = price2
-      }
-
+    if (price == `na`) {
+      price = `N/A`
     } else {
-      return message.channel.send(`Invalid type, types are\ndisc\ndigi\nxbox\nps4\noled\nxboxs\nnext`)
+      price = `$${price}`
+    }
+
+    switch (action) {
+      case "help":
+        break;
+      case "disc":
+        prices.disc = price;
+        break;
+      case "digi":
+        prices.digi = price;
+        break;
+      case "xbox":
+        prices.xbox = price;
+        break;
+      case "ps4":
+        prices.ps4 = price;
+        break;
+      case "oled":
+        prices.oled = price;
+        break;
+      case "xboxs":
+        prices.xboxs = price;
+        break;
+      case "xboxhalo":
+        prices.xboxhalo = price;
+        break;
+      case "marioswitch":
+        prices.marioswitch = price;
+        break;
+      case "pokeswitch":
+        prices.pokeswitch = price;
+        break;
+      case "controller":
+        prices.controller = price;
+        break;
+      case "halocontroller":
+        prices.halocontroller = price;
+        break;
+      case "games":
+        prices.games = price;
+        break;
+      case "headsets":
+        prices.headsets = price;
+        break;
+      case "neonswitch":
+        prices.neonswitch = price;
+        break;
+      case "fortniteswitch":
+        prices.fortniteswitch = price;
+        break;
+      case "animalswitch":
+        prices.animalswitch = price;
+        break;
+      case "remote":
+        prices.remote = price;
+        break;
+      case "airpodspro":
+        prices.airpodspro = price;
+        break;
+      case "airpodswireless":
+        prices.airpodswireless = price;
+        break;
+      case "airpodswired":
+        prices.airpodswired = price;
+        break;
+      case "next":
+        (async () => {
+          if (!args[2]) return message.channel.send({ embeds: [client.embeds.NoArgument()] });
+          let secondaction = args[1].toLowerCase();
+          price2 = Number.parseInt(args[2]);
+          if (price2 == NaN) return message.channel.send(`Invalid Prices\nGot '${price2}', need a number`);
+    
+          switch (secondaction) {
+            case "disc":
+              temp2 = `disc`
+              prices.ov_disc = price2;
+              break;
+            case "digi":
+              temp2 = `digi`
+              prices.ov_digi = price2;
+              break;
+            case "xbox":
+              temp2 = `xbox`
+              prices.ov_xbox = price2;
+              break;
+            case "oled":
+              temp2 = `oled`
+              prices.ov_oled = price2
+              break;
+            case "xboxs":
+              temp2 = `xboxs`
+              prices.ov_xboxs = price2
+            case "xboxhalo":
+              temp2 = `xboxhalo`
+              prices.ov_xboxhalo = price2
+          }
+        })()
+        break;
+      default:
+        message.channel.send(`Invalid type`);
+        return message.channel.send(`**Types:**\n${Object.entries(change).map(item => `**${item[0]}** - *${item[1]}*`).join(`\n`)}`)
     }
 
     //console.log(old, prices)
