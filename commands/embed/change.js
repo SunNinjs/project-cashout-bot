@@ -192,9 +192,14 @@ ${Object.entries(change).map(item => `**${item[0]}** - *${item[1]}*`).join(`\n`)
         (async () => {
           if (!args[2]) return message.channel.send({ embeds: [client.embeds.NoArgument()] });
           let secondaction = args[1].toLowerCase();
-          price2 = Number.parseInt(args[2]);
-          if (price2 == NaN) return message.channel.send(`Invalid Prices\nGot '${price2}', need a number`);
+          price2 = args[2].toLowerCase();
     
+          if (price2 == `na`) {
+            price2 = `N/A`
+          } else {
+            price2 = `$${price2}`
+          }
+          
           switch (secondaction) {
             case "disc":
               temp2 = `disc`
