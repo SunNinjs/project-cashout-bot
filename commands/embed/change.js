@@ -15,6 +15,11 @@ let change = {
   ov_oled: `Overnight Nitendo OLED`,
   ov_xboxs: `Overnight XBOX S`,
   ov_xboxhalo: `Overnight XBOX X Halo`,
+  la_digi: `LA DROP PS5 Digital`,
+  la_disc: `LA DROP PS5 Disc`,
+  la_xbox: `LA DROP XBOX`,
+  la_xboxhalo: `LA DROP XBOX X Halo`,
+  la_ps4: `LA DROP PS4`,
   marioswitch: `Mario Kart 8 Switch`,
   pokeswitch: `Pokémon Switch Lite`,
   controller: `PS5/Xbox Controllers`,
@@ -72,6 +77,11 @@ ${Object.entries(change).map(item => `**${item[0]}** - *${item[1]}*`).join(`\n`)
       ov_oled: `385`,
       ov_xboxs: `400`,
       ov_xboxhalo: `700`,
+      la_digi: `680`,
+      la_disc: `695`,
+      la_xbox: `580`,
+      la_xboxhalo: `740`,
+      la_ps4: `390`,
       marioswitch: `330`,
       pokeswitch: `215`,
       controller: `35`,
@@ -225,6 +235,21 @@ ${Object.entries(change).map(item => `**${item[0]}** - *${item[1]}*`).join(`\n`)
               prices.ov_xboxhalo = price2
           }
         })()
+        break;
+      case "la_disc":
+        prices.la_disc = price;
+        break;
+      case "la_digi":
+        prices.la_digi = price;
+        break;
+      case "la_xbox":
+        prices.la_xbox = price;
+        break;
+      case "la_xboxhalo":
+        prices.la_xboxhalo = price;
+        break;
+      case "la_ps4":
+        prices.la_ps4 = price;
         break;
       default:
         message.channel.send(`Invalid type`);

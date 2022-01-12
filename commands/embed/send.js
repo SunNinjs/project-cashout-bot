@@ -43,6 +43,11 @@ module.exports = {
       ov_oled: `385`,
       ov_xboxs: `400`,
       ov_xboxhalo: `700`,
+      la_digi: `680`,
+      la_disc: `695`,
+      la_xbox: `580`,
+      la_xboxhalo: `740`,
+      la_ps4: `390`,
       marioswitch: `330`,
       pokeswitch: `215`,
       controller: `35`,
@@ -73,7 +78,6 @@ module.exports = {
 > PS5 Digital - **${prices.digi}**
 > Xbox X - **${prices.xbox}**
 > Xbox X Halo - **${prices.xboxhalo}**
-> Switch OLED - **${prices.oled}** (3 Minimum or with a console)
 > Ps4 Slim - **${prices.ps4}**
 > \u200B
 > **__Overnight Labels:__**
@@ -83,26 +87,41 @@ module.exports = {
 > Xbox X Halo - **${prices.ov_xboxhalo}**
 \u200B
       `)
-      .addField(`**Other Electronics:**`, `
-> Mario Kart 8 Switch - **${prices.marioswitch}** (3 Minimum or with a console)
-> Pokémon Switch Lite - **${prices.pokeswitch}** (3 Minimum or with a console)
-> Xbox S - **${prices.xboxs}**
-> Xbox Halo Elite Controller - **${prices.halocontroller}**
+      .addField(`**__LA Local Drop-Off__**:`, `
+> PS5 Disc - **${prices.la_disc}**
+> PS5 Digital - **${prices.la_digi}**
+> Xbox X - **${prices.la_xbox}**
+> Xbox X Halo - **${prices.la_xboxhalo}**
+> Ps4 Slim - **${prices.la_ps4}**
+\u200B
+      `)
+      .addField(`**Accessories/Electronics:**`, `
 > Ps5/Xbox Controllers - **${prices.controller}**
+> Xbox Halo Elite Controller - **${prices.halocontroller}**
+> Xbox Elite Controller - **$100**
+> Pulse Headsets - **$55**
+> Ps5/Xbox Headsets - **${prices.headsets}**
 > Ps5/Xbox Games - **${prices.games}**
-> Ps5 Headsets - **${prices.headsets}**
-> Neon/ Grey Switch - **${prices.neonswitch}**
-> Fortnite Wildcat Switch - **${prices.fortniteswitch}**
-> Animal Crossing Switch - **${prices.animalswitch}**
-> Media Remote - **${prices.remote}**
+> Media Remote/Accessories - **${prices.remote}**
 > Airpods Pro - **${prices.airpodspro}**
 > Airpods Wireless Charging - **${prices.airpodswireless}**
 > Airpods Wired Charging - **${prices.airpodswired}**
+> Pokémon Switch Lite - **${prices.pokeswitch}**
+> Nintendo Switch (all models) - **${prices.neonswitch}**
+> Mario Kart 8 Switch - **${prices.marioswitch}**
+> Xbox S - **${prices.xboxs}**
+> Switch OLED - **${prices.oled}**
 
-**Open a ticket in <#872365247451762698> for a label. Prices are guaranteed once shipped!**
+If you have **bulk consoles (10+ pieces)**, DM me for pricing.
+
+**Open a ticket in <#872365247451762698> for a label!**
       `, false)
 
     await check.send({ embeds: [Emb], content: `@everyone` });
     await message.delete();
   }
 }
+
+/*
+
+*/
