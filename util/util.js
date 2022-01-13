@@ -116,6 +116,7 @@ class Util extends EventEmitter {
 > Xbox X Halo - **${prices.ov_xboxhalo}**
 \u200B
         `)
+/*
         .addField(`**__LA Local Drop-Off__**:`, `
 > PS5 Disc - **${prices.la_disc}**
 > PS5 Digital - **${prices.la_digi}**
@@ -124,6 +125,7 @@ class Util extends EventEmitter {
 > Ps4 Slim - **${prices.la_ps4}**
 \u200B
       `)
+*/
         .addField(`**Accessories/Electronics:**`, `
 > Ps5/Xbox Controllers - **${prices.controller}**
 > Xbox Halo Elite Controller - **${prices.halocontroller}**
