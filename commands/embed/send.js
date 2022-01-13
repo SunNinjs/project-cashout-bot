@@ -72,7 +72,7 @@ module.exports = {
       .setTimestamp()
       .setTitle(`TODAY'S PRICES`)
       //.setThumbnail(`https://cdn.discordapp.com/attachments/896630033886613517/899866069777416222/unknown.png`)
-      .setDescription(`__Payments will be received the same day packages are delivered.__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\u200B`)
+      .setDescription(`__Payments will be received the same day packages are delivered. Prices are guaranteed once shipped!__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\u200B`)
       .addField(`**__Consoles:__**`, `
 > PS5 Disc - **${prices.disc}**
 > PS5 Digital - **${prices.digi}**
