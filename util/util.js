@@ -97,7 +97,7 @@ class Util extends EventEmitter {
       WebHookMes(prices) {
         const Emb = new MessageEmbed()
         .setColor(`#0fffbf`)
-        .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`)
+        .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
         .setTimestamp()
         .setTitle(`TODAY'S PRICES`)
         //.setThumbnail(`https://cdn.discordapp.com/attachments/896630033886613517/899866069777416222/unknown.png`)
@@ -151,7 +151,7 @@ class Util extends EventEmitter {
       AppleProducts() {
         let embed = new MessageEmbed()
           .setColor(`#0fffbf`)
-          .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`)
+          .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
           .setTimestamp()
           .setTitle(`__Apple Products__`)
           .setDescription(`
@@ -177,7 +177,7 @@ class Util extends EventEmitter {
       Guides() {
       let embed = new MessageEmbed()
       .setColor(`#0fffbf`)
-      .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`)
+      .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
       .setTimestamp()
       .setTitle(`__Guides__`)
       .setDescription(`
@@ -212,7 +212,7 @@ Now enjoy not paying taxes on any electronics ever again!
       WelcomeMessage() {
     let embed = new MessageEmbed()
       .setColor(`#0fffbf`)
-      .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`)
+      .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
       .setTimestamp()
       .setTitle(`__Welcome to Project Cashout!__`)
       .setDescription(`
@@ -244,7 +244,7 @@ Invite your friends, you will be rewarded <#872373309822627870>
       Shipping() {
       let embed = new MessageEmbed()
       .setColor(`#0fffbf`)
-      .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`)
+      .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
       .setTimestamp()
       .setTitle(`__Shipping and Packaging__`)
       .setDescription(`
@@ -271,7 +271,7 @@ If you don’t have any boxes that fit, [here are some recommendations](https://
       Payments() {
       let embed = new MessageEmbed()
       .setColor(`#0fffbf`)
-      .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`)
+      .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
       .setTimestamp()
       .setTitle(`__Payments__`)
       .setDescription(`
@@ -300,7 +300,7 @@ __**Forms of payment:**__ We cover all fees.
       FAQ() {
         let embed = new MessageEmbed()
         .setColor(`#0fffbf`)
-        .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/5115e54925a361fe03832435e6598596.webp?size=128`)
+        .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
         .setTimestamp()
         .setTitle(`__FAQ__`)
         .setDescription(`
