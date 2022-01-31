@@ -114,7 +114,7 @@ module.exports = {
 > Xbox S - **${prices.xboxs}**
 > Switch OLED - **${prices.oled}**
 
-If you have **bulk consoles (10+ pieces)**, DM me for pricing.
+Bulk consoles (10+) DM for pricing.
 
 **Open a ticket in <#872365247451762698> for a label!**
       `, false)

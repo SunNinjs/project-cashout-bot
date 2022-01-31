@@ -18,9 +18,23 @@ client.on(`ready`, async () => {
   }).then(() => console.log(`Mongoose Connection Established`))
 
   let guild = client.guilds.cache.get(`866951718726139924`);
+
+  let faq = client.channels.cache.get(`872358893727150171`); //872358893727150171
+  let payments = client.channels.cache.get(`872361890133712917`); //872361890133712917
+  let ship = client.channels.cache.get(`872363854078812160`); //872363854078812160
+  let guides = client.channels.cache.get(`872369971307618304`); //872369971307618304
+  let welcome = client.channels.cache.get(`872358723581009970`); //872358723581009970
+  let test = client.channels.cache.get(`896630033886613517`);
+
   //let channel = client.channels.cache.get(`902011893743505468`);
 
   client.util = new Util(client);
+  //guides.send({ embeds: [client.embeds.Guides()] })
+  //welcome.send({ embeds: [client.embeds.WelcomeMessage()] })
+  //welcome.send({ content: `Invite Link: https://discord.gg/bGbkTpkChY` })
+  //ship.send({ embeds: [client.embeds.Shipping()] })
+  //payments.send({ embeds: [client.embeds.Payments()] })
+  //faq.send({ embeds: [client.embeds.FAQ()] })
   //channel.send({ embeds: [client.embeds.AppleProducts()] })
 })
 

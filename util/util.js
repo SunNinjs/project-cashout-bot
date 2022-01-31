@@ -143,8 +143,8 @@ class Util extends EventEmitter {
         .addField(`\u200B`, `
 💵 __Payments will be received the **same day** packages are delivered.__
 \u200B
+Bulk consoles (10+) DM for pricing.\n\n**Check out our discord for more details:**\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)
         `)
-        .addField(`**Payment Methods:**`, `Paypal, Zelle, Venmo, Cashapp, Applepay, BofA transfer, Chase transfer, ACH transfer, Wire transfer, Checks\n\n**Check out our discord for more details:**\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)`)
 
         return Emb
       },
@@ -176,7 +176,7 @@ class Util extends EventEmitter {
       },
       Guides() {
       let embed = new MessageEmbed()
-      .setColor(`#0fffbf`)
+      .setColor(`#0fffbf`) //`#0fffbf`
       .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
       .setTimestamp()
       .setTitle(`__Guides__`)
@@ -193,8 +193,6 @@ class Util extends EventEmitter {
 **__TAX EXEMPT:__** 
 
 In order to apply for tax exempt at **Walmart** & **Bestbuy**, you must first have a registered Business License/Seller's Permit. It's a long and tedious process so make sure all the information is correct.
-
-> You can register for a permit here: https://onlineservices.cdtfa.ca.gov/_/
 
 Once you have the permit number,
 
@@ -282,16 +280,16 @@ Please be willing to accept multiple forms of payment due to daily limits for ea
 
 Open a ticket when your packages deliver. <#872366770898477086>
 
-__**Forms of payment:**__ We cover all fees.
+__**Forms of payment:**__
 >>> **Paypal** (preferred)  - *No limit*
 **Zelle** - *100k per month/5k per day*
 **Venmo** - *5k per week*
 **CashApp** - *10k per week*
 **Apple Pay** - *10k per week*
-**BoA Transfer** (preferred) - *No limit*
 **Chase Transfer** (preferred) - *No limit*
 **ACH Transfer** (preferred) - *No limit*
 **Wire Transfer** (preferred) - *No limit*
+**E-checks** (preferred) - *No Limit*
 **Checks** (deposit remotely with an image or mail it to you) - *No limit*
       `)
 
