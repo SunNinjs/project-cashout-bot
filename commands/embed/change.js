@@ -205,7 +205,7 @@ ${Object.entries(change).map(item => `**${item[0]}** - *${item[1]}*`).join(`\n`)
           price2 = args[2].toLowerCase();
     
           if (price2 == `na`) {
-            price2 = `N/A`
+            price2 = `Not Buying`
           } else {
             price2 = `$${price2}`
           }
