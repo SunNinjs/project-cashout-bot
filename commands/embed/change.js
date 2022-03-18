@@ -130,7 +130,7 @@ ${Object.entries(change).map(item => `**${item[0]}** - *${item[1]}*`).join(`\n`)
     let price2;
 
     if (price == `na`) {
-      price = `N/A`
+      price = `Not Buying`
     } else {
       price = `$${price}`
     }
