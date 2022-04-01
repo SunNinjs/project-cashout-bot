@@ -94,7 +94,17 @@ class Util extends EventEmitter {
     this.errors = Errors
 
     this.embeds = {
-      WebHookMes(prices) {
+      WebHookMes(prices, stat) {
+        let lastfield = ``
+
+        if (stat) {
+          lastfield = `💵 __Payments will be received the **same day** packages are delivered.__
+\u200B
+Bulk consoles (10+) DM for pricing.\n\n**Check out our discord for more details:**\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)`
+        } else {
+          lastfield = `Bulk consoles (10+) DM for pricing.\n\n**Check out our discord for more details:**\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)`
+        }
+
         const Emb = new MessageEmbed()
         .setColor(`#0fffbf`)
         .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
@@ -140,11 +150,7 @@ class Util extends EventEmitter {
 > Xbox S - **${prices.xboxs}**
 > Switch OLED - **${prices.oled}**
         `, false)
-        .addField(`\u200B`, `
-💵 __Payments will be received the **same day** packages are delivered.__
-\u200B
-Bulk consoles (10+) DM for pricing.\n\n**Check out our discord for more details:**\n[Link https://discord.gg/bGbkTpkChY](https://discord.gg/bGbkTpkChY)
-        `)
+        .addField(`\u200B`, lastfield)
 
         return Emb
       },

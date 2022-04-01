@@ -41,6 +41,7 @@ client.on(`ready`, async () => {
 client.logs = new Collection();
 client.commands = new Collection();
 client.aliases = new Collection();
+client.lockship = true;
 fs.readdirSync(path.resolve(__dirname, `./commands`)).forEach(dir => {
   const commands = fs.readdirSync(path.resolve(__dirname, `./commands/${dir}`)).filter(file => file.endsWith(".js"))
   for (let file of commands) {

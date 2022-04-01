@@ -92,6 +92,7 @@ module.exports = {
    */
   async execute(message, args, client) {
   
+    let lockship = client.lockship;
     let prices = {
       digi: `670`,
       disc: `730`,
@@ -163,8 +164,8 @@ __Example:__ \`\!webhook send\`
 
 **\!webhook create**
 *Creates a webhook for a channel*
-__Usage:__ \`\!webhook send {CHANNEL}\`
-__Example:__ \`\!webhook send #partnerships\`
+__Usage:__ \`\!webhook create {CHANNEL}\`
+__Example:__ \`\!webhook create #partnerships\`
       `, true)
 
     if (!args[0]) return message.channel.send({ embeds: [helpEmbed] })
@@ -216,7 +217,7 @@ __Example:__ \`\!webhook send #partnerships\`
         let temp = await Prices.find();
         if (temp.length > 0) prices = temp[0]
 
-        let Emb = client.embeds.WebHookMes(prices);
+        let Emb = client.embeds.WebHookMes(prices, lockship);
         let count = 0;
         let deleted = [];
 
@@ -349,7 +350,7 @@ __Example:__ \`\!webhook send #partnerships\`
           let temp = await Prices.find();
           if (temp.length > 0) prices = temp[0]
   
-          message.channel.send({ content: `PREVIEW\nhttps://discord.gg/bGbkTpkChY`, embeds: [client.embeds.WebHookMes(prices)] })
+          message.channel.send({ content: `PREVIEW\nhttps://discord.gg/bGbkTpkChY`, embeds: [client.embeds.WebHookMes(prices, lockship)] })
         })()
         break
       default:
