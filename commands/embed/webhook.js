@@ -267,7 +267,8 @@ __Example:__ \`\!webhook create #partnerships\`
         }
 
         message.channel.send(`**All Messages have Been Sent**\n*${count} messages sent*`);
-        deleted.length > 0 ? message.channel.send(`Webhooks that couldn't be sent\n\`\`\`\n${deleted.join(`\n`)}\n\`\`\``) : null;
+        console.log(deleted)
+        deleted.length > 0 ? message.channel.send(`Webhooks that couldn't be sent\n\`\`\`\n${deleted.map(ele => ele.url).join(`\n`)}\n\`\`\``) : null;
         break;
       case "info":
         (async () => {
