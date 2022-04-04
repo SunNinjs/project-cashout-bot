@@ -76,19 +76,16 @@ module.exports = {
     }
 
     if (msgSettings.lockprices) {
-      str += ` Prices are locked in when you dropoff at UPS.__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\u200B`
-    } else {
-      str += `__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\u200B`
+      str += ` Prices are locked in when you dropoff at UPS.__`
     }
 
-    const Emb = new MessageEmbed()
-      .setColor(`#0fffbf`)
-      .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
-      .setTimestamp()
-      .setTitle(`TODAY'S PRICES`)
-      //.setThumbnail(`https://cdn.discordapp.com/attachments/896630033886613517/899866069777416222/unknown.png`)
-      .setDescription(str)
-      .addField(`**__Consoles:__**`, `
+    if (msgSettings.groundshipping) {
+      str += `\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\u200B`
+    } else {
+      str += `\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT SHIPPING!**\n\u200B`
+    }
+
+    let firstfield = `
 > PS5 Disc - **${prices.disc}**
 > PS5 Digital - **${prices.digi}**
 > Xbox X - **${prices.xbox}**
@@ -101,7 +98,26 @@ module.exports = {
 > Xbox X - **${prices.ov_xbox}**
 > Xbox X Halo - **${prices.ov_xboxhalo}**
 \u200B
-      `)
+      `
+
+    if (!msgSettings.groundshipping) {
+      firstfield = `
+> PS5 Disc - **${prices.ov_disc}**
+> PS5 Digital - **${prices.ov_digi}**
+> Xbox X - **${prices.ov_xbox}**
+> Xbox X Halo - **${prices.ov_xboxhalo}**
+\u200B
+`
+    }
+
+    const Emb = new MessageEmbed()
+      .setColor(`#0fffbf`)
+      .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
+      .setTimestamp()
+      .setTitle(`TODAY'S PRICES`)
+      //.setThumbnail(`https://cdn.discordapp.com/attachments/896630033886613517/899866069777416222/unknown.png`)
+      .setDescription(str)
+      .addField(msgSettings.groundshipping == true ? `**__Consoles:__**` : `**__Overnight Labels:__**`, firstfield)
 /*
       .addField(`**__LA Local Drop-Off__**:`, `
 > PS5 Disc - **${prices.la_disc}**

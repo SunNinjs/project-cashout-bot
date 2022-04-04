@@ -44,7 +44,8 @@ client.aliases = new Collection();
 client.messageSettings = {
   lockship: true,
   delivery: true,
-  lockprices: true
+  lockprices: true,
+  groundshipping: true
 }
 client.lockship = true;
 fs.readdirSync(path.resolve(__dirname, `./commands`)).forEach(dir => {
