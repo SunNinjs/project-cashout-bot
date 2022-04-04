@@ -29,6 +29,8 @@ module.exports = {
 
     if (!check) return message.channel.send(`Channel could not be found`)
 
+    let msgSettings = client.messageSettings;
+
     let prices = {
       digi: `670`,
       disc: `730`,
@@ -66,13 +68,26 @@ module.exports = {
     let temp = await Prices.find();
     if (temp.length > 0) prices = temp[0]
 
+    let str = ``;
+    if (msgSettings.delivery) {
+      str += `__Payments will be received the same day packages are delivered.`
+    } else {
+      str += `__Prices will be based on day of delivery. Overnight labels are locked once shipped.__`
+    }
+
+    if (msgSettings.lockprices) {
+      str += ` Prices are locked in when you dropoff at UPS.__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\u200B`
+    } else {
+      str += `__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\u200B`
+    }
+
     const Emb = new MessageEmbed()
       .setColor(`#0fffbf`)
       .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
       .setTimestamp()
       .setTitle(`TODAY'S PRICES`)
       //.setThumbnail(`https://cdn.discordapp.com/attachments/896630033886613517/899866069777416222/unknown.png`)
-      .setDescription(`__Payments will be received the same day packages are delivered. Prices are guaranteed once shipped!__\n\n🏷 **LABELS WILL BE PROVIDED! OVERNIGHT & GROUND SHIPPING!**\n\u200B`)
+      .setDescription(str)
       .addField(`**__Consoles:__**`, `
 > PS5 Disc - **${prices.disc}**
 > PS5 Digital - **${prices.digi}**

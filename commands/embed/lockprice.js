@@ -1,9 +1,9 @@
 const { Message, Client, MessageEmbed } = require(`discord.js`)
 
 module.exports = {
-  name: `lockship`,
+  name: `lockprices`,
   cooldown: 5,
-  desc: `Shows the webhook message`,
+  desc: `Shows a part of the real message`,
   sRoles: [`A`],
     /**
    * Sends an custom Embed
@@ -13,15 +13,15 @@ module.exports = {
    * @returns {void} void
    */
   async execute(message, args, client) {
-    let stat = client.messageSettings.lockship;
+    let stat = client.messageSettings.lockprices;
     let newstat = !stat;
-    client.messageSettings.lockship = newstat;
+    client.messageSettings.lockprices = newstat;
     let mes = new MessageEmbed()
         .setColor(`#0fffbf`)
         .setFooter(`Project Cashout`, `https://cdn.discordapp.com/icons/866951718726139924/e440829b1404d110b7f2195d3d6a0917.webp?size=128`)
         .setTimestamp()
-        .setTitle(`Lockship has been changed`)
-        .setDescription(`Lockship has changed from **${stat}** to **${newstat}**`)
+        .setTitle(`Lockprices has been changed`)
+        .setDescription(`Lockprices has changed from **${stat}** to **${newstat}**`)
 
     message.channel.send({ embeds: [mes] })
   }

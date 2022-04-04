@@ -92,7 +92,7 @@ module.exports = {
    */
   async execute(message, args, client) {
   
-    let lockship = client.lockship;
+    let lockship = client.messageSettings.lockship;
     let prices = {
       digi: `670`,
       disc: `730`,
