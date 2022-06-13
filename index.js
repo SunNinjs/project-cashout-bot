@@ -160,4 +160,4 @@ client.on(`messageCreate`, async message => {
 	}
 })
 
-client.login(process.env.TOKEN2) //ODMxNzk2MjIxNjM4NjA2ODY4.YHacmQ.y8eP88-M1Dy3yNSgUe7jL-Qsv0s
+client.login(process.env.TOKEN2)
