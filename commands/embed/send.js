@@ -34,6 +34,8 @@ module.exports = {
     let prices = {
       digi: `670`,
       disc: `730`,
+      dischorizon: `730`,
+      digihorizon: `670`,
       xbox: `705`,
       oled: `385`,
       ps4: `360`,
@@ -88,6 +90,8 @@ module.exports = {
     let firstfield = `
 > PS5 Disc - **${prices.disc}**
 > PS5 Digital - **${prices.digi}**
+> PS5 Disc Horizon - **${prices.dischorizon}**
+> PS5 Digital Horizon - **${prices.digihorizon}**
 > Xbox X - **${prices.xbox}**
 > Xbox X Halo - **${prices.xboxhalo}**
 > Ps4 Slim - **${prices.ps4}**

@@ -96,6 +96,8 @@ module.exports = {
     let prices = {
       digi: `670`,
       disc: `730`,
+      dischorizon: `730`,
+      digihorizon: `670`,
       xbox: `705`,
       oled: `385`,
       ps4: `360`,

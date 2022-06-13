@@ -4,6 +4,8 @@ const Prices = require(`../../schemas/prices.js`);
 let change = {
   digi: `PS5 Digital`,
   disc: `PS5 Disc`,
+  dischorizon: `Disc Horizon`,
+  digihorizon: `Digital Horizon`,
   xbox: `XBOX`,
   oled: `Nitendo OLED`,
   ps4: `PS4 Slim`,
@@ -66,6 +68,8 @@ ${Object.entries(change).map(item => `**${item[0]}** - *${item[1]}*`).join(`\n`)
     let prices = {
       digi: `670`,
       disc: `730`,
+      dischorizon: `730`,
+      digihorizon: `670`,
       xbox: `705`,
       oled: `385`,
       ps4: `360`,
@@ -143,6 +147,12 @@ ${Object.entries(change).map(item => `**${item[0]}** - *${item[1]}*`).join(`\n`)
         break;
       case "digi":
         prices.digi = price;
+        break;
+      case "dischorizon":
+        prices.dischorizon = price;
+        break;
+      case "digihorizon":
+        prices.digihorizon = price;
         break;
       case "xbox":
         prices.xbox = price;

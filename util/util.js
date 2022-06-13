@@ -115,6 +115,8 @@ Bulk consoles (10+) DM for pricing.\n\n**Check out our discord for more details:
         .addField(`**__Consoles:__**`, `
 > PS5 Disc - **${prices.disc}**
 > PS5 Digital - **${prices.digi}**
+> PS5 Disc Horizon - **${prices.dischorizon}**
+> PS5 Digital Horizon - **${prices.digihorizon}**
 > Xbox X - **${prices.xbox}**
 > Xbox X Halo - **${prices.xboxhalo}**
 > Ps4 Slim - **${prices.ps4}**

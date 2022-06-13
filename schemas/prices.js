@@ -28,6 +28,8 @@ const reqObj = {
 const welcomeSchema = mongoose.Schema({
   disc: reqString,
   digi: reqString,
+  dischorizon: reqString,
+  digihorizon: reqString,
   xbox: reqString,
   oled: reqString,
   ps4: reqString,
